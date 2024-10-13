@@ -2,25 +2,26 @@
 
 float angleX = 0.0f;
 float angleY = 0.0f;
+float facEsc = 1;
 
-// Función para dibujar la mesa
+// Función para dibujar el mouse
 void drawMouse() {
 
     //Lineas de los ejes
     glBegin(GL_LINES);
 
     //Eje x
-    glColor3f(1, 0, 0);
+    glColor3f(1, 0, 0);//rojo
     glVertex3f(-300, 0, 0);
     glVertex3f(300, 0, 0);
 
     //Eje y
-    glColor3f(0, 1, 0);
+    glColor3f(0, 1, 0);//verde
     glVertex3f(0, -300, 0);
     glVertex3f(0, 300, 0);
 
     //Eje z
-    glColor3f(0, 0, 1);
+    glColor3f(0, 0, 1);//azul
     glVertex3f(0, 0, -300);
     glVertex3f(0, 0, 300);
 
@@ -33,12 +34,11 @@ void drawMouse() {
     glutSolidCube(1.0f);
     glPopMatrix();
 
-
     //Teclado
     glPushMatrix();
     glColor3f(0.3f, 0.3f, 0.3f);
     glTranslatef(-0.5,0,0);
-    glScalef(0.3f, 0.03f, 0.2f);
+    glScalef(0.4f, 0.03f, 0.2f);
     glutSolidCube(1.0f);
     glPopMatrix();
 }
@@ -47,16 +47,14 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Configurar la cámara para ver el plano XY desde el eje Z positivo
-    gluLookAt(0.0f, 0.0f, 1.50f,  // Posición de la cámara
-        0.0f, 0.0f, 0.0f,  // Punto hacia donde mira (el origen)
-        0.0f, 1.0f, 0.0f); // Vector arriba (eje Y)
+    glScalef(facEsc, facEsc, facEsc);
 
     // Aplicar rotaciones según las teclas
     glRotatef(angleX, 1.0f, 0.0f, 0.0f);
     glRotatef(angleY, 0.0f, 1.0f, 0.0f);
 
     drawMouse();
+
     glutSwapBuffers();
 }
 
@@ -65,6 +63,12 @@ void keyboardNormal(unsigned char key, int x, int y) {
     case 'r':
         angleX = 0.0f;
         angleY = 0.0f;
+        break;
+    case '+':
+        facEsc += 0.1;
+        break;
+    case '-':
+        facEsc -= 0.1;
         break;
     }
     glutPostRedisplay();
@@ -95,7 +99,7 @@ void initOpenGL() {
     // Ajuste de la proyección ortogonal
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-5, 5, -5, 5, -5, 5);  // Ajuste del volumen de visualización ortogonal
+    glOrtho(-4, 4, -4, 4, -4, 4);  // Ajuste del volumen de visualización ortogonal
 
     glMatrixMode(GL_MODELVIEW);
 }
