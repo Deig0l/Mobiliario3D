@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Mobiliario3D.cpp" />
     <ClCompile Include="Mesa.cpp" />
+    <ClCompile Include="PC&amp;Monitor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
