@@ -21,5 +21,8 @@
     <ClCompile Include="Mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PC&amp;Monitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
