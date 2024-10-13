@@ -69,6 +69,16 @@ void display() {
     glutSwapBuffers();
 }
 
+void keyboardNormal(unsigned char key, int x, int y) {
+    switch (key) {
+    case 'r':
+        angleX = 0.0f;
+        angleY = 0.0f;
+        break;
+    }
+    glutPostRedisplay();
+}
+
 void keyboard(int key, int x, int y) {
     switch (key) {
     case GLUT_KEY_LEFT:  // Flecha izquierda
@@ -104,6 +114,7 @@ int main(int argc, char** argv) {
 
     initOpenGL();
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboardNormal);
     glutSpecialFunc(keyboard);
     glutMainLoop();
     return 0;
