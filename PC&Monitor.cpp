@@ -12,7 +12,6 @@ void inicializacion(void);
 void display_cb(void);
 void plano3D();
 void teclado_cb(GLubyte key, GLint x, GLint y);
-void cubo(int l);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
 void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
@@ -175,64 +174,6 @@ void teclado_cb(GLubyte key, GLint x, GLint y) {
 		break;
 	}
 	glutPostRedisplay();
-}
-
-void cubo(int l)
-{
-	//Cara frontal
-	asignarColor(RED);
-	//glColor3f(1.0, 0.0, 0.0);//rojo
-	glBegin(GL_QUADS);
-	glVertex3i(-l, -l, l);
-	glVertex3i(-l, l, l);
-	glVertex3i(l, l, l);
-	glVertex3i(l, -l, l);
-	glEnd();
-	//Cara posterior
-	asignarColor(GREEN);
-	//glColor3f(0.0, 1.0, 0.0);//verde
-	glBegin(GL_QUADS);
-	glVertex3i(-l, -l, -l);
-	glVertex3i(-l, l, -l);
-	glVertex3i(l, l, -l);
-	glVertex3i(l, -l, -l);
-	glEnd();
-	//Cara inferior
-	asignarColor(BLUE);
-	//glColor3f(0.0, 0.0, 1.0);//azul
-	glBegin(GL_QUADS);
-	glVertex3i(-l, -l, l);
-	glVertex3i(-l, -l, -l);
-	glVertex3i(l, -l, -l);
-	glVertex3i(l, -l, l);
-	glEnd();
-	//Cara superior
-	asignarColor(MAGENTA);
-	//glColor3f(1.0, 0.0, 1.0);//magenta
-	glBegin(GL_QUADS);
-	glVertex3i(-l, l, l);
-	glVertex3i(-l, l, -l);
-	glVertex3i(l, l, -l);
-	glVertex3i(l, l, l);
-	glEnd();
-	//Cara lateral izquierda
-	asignarColor(YELLOW);
-	//glColor3f(1.0, 1.0, 0.0);//amarillo
-	glBegin(GL_QUADS);
-	glVertex3i(-l, -l, l);
-	glVertex3i(-l, l, l);
-	glVertex3i(-l, l, -l);
-	glVertex3i(-l, -l, -l);
-	glEnd();
-	//Cara lateral derecha
-	asignarColor(CYAN);
-	//glColor3f(0.0, 1.0, 1.0);//cyan
-	glBegin(GL_QUADS);
-	glVertex3i(l, -l, l);
-	glVertex3i(l, l, l);
-	glVertex3i(l, l, -l);
-	glVertex3i(l, -l, -l);
-	glEnd();
 }
 
 void prisma(float l, float h, float d, float x, float y, float z, Colores color) {
