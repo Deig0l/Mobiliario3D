@@ -12,12 +12,12 @@ void inicializacion(void);
 void display_cb(void);
 void plano3D();
 void teclado_cb(GLubyte key, GLint x, GLint y);
-void circulo(double r, float x, float y, float z, Colores color);
 void cubo(int l);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
 void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
 void monitor(float x, float y, float z);
+void pc(float x, float y, float z);
 
 float angle = 0.0;
 int lado = 3;
@@ -71,18 +71,17 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(500, 500);
 	glutCreateWindow("Cubo");
-	glutDisplayFunc(display_cb); //Despliega
-	glutKeyboardFunc(teclado_cb); //Controla teclado
+	glutDisplayFunc(display_cb);
+	glutKeyboardFunc(teclado_cb);
 	inicializacion();
 	glutMainLoop();
 	return 0;
 }
 void inicializacion(void) {
-	//glClearColor(0.0, 0.0, 0.0, 0.0);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-20.0, 20.0, -20.0, 20.0, -20.0, 20.0);
+	glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -91,18 +90,9 @@ void display_cb(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	plano3D();
 	glPushMatrix();
-	switch (mode) {
-	case 1:
-		glScalef(facEsc, facEsc, facEsc);
-		prismaMulticolor(1.6, 3.0, 3.8, 0, 0, -0.2, DGREY, DGREY, DGREY, DGREY, DGREY, DGREY);
-		prismaMulticolor(1.6, 3.0, 0.2, 0, 0, 0, GREY, GREY, GREY, GREY, GREY, GREY);
-		circulo(0.2, 2.0, 1.0, 0, BLUE);
-		break;
-	case 2:
-		glScalef(facEsc, facEsc, facEsc);
-		monitor(0, 0, 0);
-		break;
-	}
+	glScalef(facEsc, facEsc, facEsc);
+	pc(5.0, 0, 0);
+	monitor(0, 0, -2.0);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -127,12 +117,12 @@ void plano3D() {
 
 void teclado_cb(GLubyte key, GLint x, GLint y) {
 	switch (key) {
-	case 49:
-		mode = 1;
-		break;
-	case 50:
-		mode = 2;
-		break;
+		/*case 49:
+			mode = 1;
+			break;
+		case 50:
+			mode = 2;
+			break;*/
 	case 27:
 		exit(1);
 		break;
@@ -185,20 +175,6 @@ void teclado_cb(GLubyte key, GLint x, GLint y) {
 		break;
 	}
 	glutPostRedisplay();
-}
-
-void circulo(double r, float x, float y, float z, Colores color) {
-	double pi = 3.14159265358979323846;
-	asignarColor(color);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex3f(x, y, z);
-	for (int i = 0; i <= 100; i++) {
-		float theta = 2.0f * pi * float(i) / 100.f;
-		float dx = r * cosf(theta);
-		float dy = r * sinf(theta);
-		glVertex3f(x + dx, y + dy, z);
-	}
-	glEnd();
 }
 
 void cubo(int l)
@@ -373,3 +349,21 @@ void monitor(float x, float y, float z) {
 	//Cuello
 	prisma(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, DGREY);
 }
+
+void pc(float x, float y, float z) {
+	//Prisma principal
+	prisma(2.0, 3.5, 3.8, 0.0 + x, 0.0 + y, -0.2 + z, DGREY);
+	//Prisma gris frontal
+	prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
+	//Ranura superior
+	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
+	//Ranura media
+	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
+	//Ranura inferior
+	prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
+	//Ranura posterior
+	prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
+	//Boton
+	prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
+}
+
