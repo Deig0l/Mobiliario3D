@@ -1,4 +1,4 @@
-/*#include <GL/glut.h>
+#include <GL/glut.h>
 
 float angleX = 0.0f;
 float angleY = 0.0f;
@@ -118,4 +118,4 @@ int main(int argc, char** argv) {
     glutSpecialFunc(keyboard);
     glutMainLoop();
     return 0;
-}*/
+}
