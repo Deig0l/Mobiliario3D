@@ -131,6 +131,7 @@
     <ClCompile Include="Mesa.cpp" />
     <ClCompile Include="PC&amp;Monitor.cpp" />
     <ClCompile Include="Mouse&amp;Keyboard.cpp" />
+    <ClCompile Include="Silla.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
