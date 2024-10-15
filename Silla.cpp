@@ -1,121 +1,199 @@
+//#include <windows.h>
+//#include <cmath>
 //#include <GL/glut.h>
 //
-//float angleX = 0.0f;
-//float angleY = 0.0f;
+//enum Colores {
+//	BLACK, WHITE, RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN, GREY, LGREY, DGREY
+//};
 //
-//// Función para dibujar la silla
-//void drawChair() {
-//    // Dibujar el asiento de la silla
-//    glPushMatrix();
-//    glColor3f(0.0f, 0.0f, 0.0f); // Color negro
-//    glTranslatef(0.0f, 0.5f, 0.0f);
-//    glScalef(1.0f, 0.12f, 1.01f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
+//// Prototipos de funciones
+//void asignarColor(Colores color);
+//void inicializacion(void);
+//void display_cb(void);
+//void plano3D();
+//void teclado_cb(GLubyte key, GLint x, GLint y);
+//void prisma(float l, float h, float d, float x, float y, float z, Colores color);
+//void silla(float x, float y, float z);
 //
-//    // Dibujar el respaldo de la silla
-//    glPushMatrix();
-//    glColor3f(0.0f, 0.0f, 0.0f); // Color negro
-//    glTranslatef(0.0f, 1.1f, -0.45f);
-//    glScalef(1.0f, 0.7f, 0.12f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
+//float angle = 0.0;
+//int lado = 3;
+//int height = 1;
+//int depht = 7;
+//int mode = 1;
+//float facEsc = 1;
 //
-//    // Dibujar las patas de la silla
-//    glPushMatrix();
-//    glColor3f(0.5f, 0.5f, 0.5f); // Color gris
-//
-//    // Primera pata
-//    glPushMatrix();
-//    glTranslatef(-0.4f, 0.3f, -0.45f);
-//    glScalef(0.1f, 1.3f, 0.1f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
-//
-//    // Segunda pata
-//    glPushMatrix();
-//    glTranslatef(0.4f, 0.3f, -0.45f);
-//    glScalef(0.1f, 1.3f, 0.1f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
-//
-//    // Tercera pata
-//    glPushMatrix();
-//    glTranslatef(-0.4f, 0.1f, 0.4f);
-//    glScalef(0.1f, 0.9f, 0.1f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
-//
-//    // Cuarta pata
-//    glPushMatrix();
-//    glTranslatef(0.4f, 0.1f, 0.4f);
-//    glScalef(0.1f, 0.9f, 0.1f);
-//    glutSolidCube(1.0f);
-//    glPopMatrix();
-//
-//    glPopMatrix();
+//void asignarColor(Colores color) {
+//	switch (color) {
+//	case BLACK: glColor3f(0.0, 0.0, 0.0); break;
+//	case WHITE: glColor3f(1.0, 1.0, 1.0); break;
+//	case RED: glColor3f(1.0, 0.0, 0.0); break;
+//	case GREEN: glColor3f(0.0, 1.0, 0.0); break;
+//	case BLUE: glColor3f(0.0, 0.0, 1.0); break;
+//	case YELLOW: glColor3f(1.0, 1.0, 0.0); break;
+//	case MAGENTA: glColor3f(1.0, 0.0, 1.0); break;
+//	case CYAN: glColor3f(0.0, 1.0, 1.0); break;
+//	case GREY: glColor3f(0.5, 0.5, 0.5); break;
+//	case LGREY: glColor3f(0.6, 0.6, 0.6); break;
+//	case DGREY: glColor3f(0.2, 0.2, 0.2); break;
+//	default: break;
+//	}
 //}
 //
-//void display() {
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//    glLoadIdentity();
-//    gluLookAt(3.0f, 2.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-//
-//    glRotatef(angleX, 1.0f, 0.0f, 0.0f);
-//    glRotatef(angleY, 0.0f, 1.0f, 0.0f);
-//
-//    drawChair();
-//
-//    glutSwapBuffers();
-//}
-//
-//void keyboardNormal(unsigned char key, int x, int y) {
-//    switch (key) {
-//    case 'r':
-//        angleX = 0.0f;
-//        angleY = 0.0f;
-//        break;
-//    }
-//    glutPostRedisplay();
-//}
-//
-//void keyboard(int key, int x, int y) {
-//    switch (key) {
-//    case GLUT_KEY_LEFT:  // Flecha izquierda
-//        angleY -= 5.0f;
-//        break;
-//    case GLUT_KEY_RIGHT: // Flecha derecha
-//        angleY += 5.0f;
-//        break;
-//    case GLUT_KEY_UP:    // Flecha arriba
-//        angleX -= 5.0f;
-//        break;
-//    case GLUT_KEY_DOWN:  // Flecha abajo
-//        angleX += 5.0f;
-//        break;
-//    }
-//    glutPostRedisplay();
-//}
-//
-//void initOpenGL() {
-//    glEnable(GL_DEPTH_TEST);
-//    glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
-//    glMatrixMode(GL_PROJECTION);
-//    gluPerspective(45.0, 1.0, 1.0, 100.0);
-//    glMatrixMode(GL_MODELVIEW);
-//}
-//
-//// Main
 //int main(int argc, char** argv) {
-//    glutInit(&argc, argv);
-//    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-//    glutInitWindowSize(600, 600);
-//    glutCreateWindow("Silla");
+//	glutInit(&argc, argv);
+//	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+//	glutInitWindowSize(500, 500);
+//	glutCreateWindow("Silla 3D");
+//	glutDisplayFunc(display_cb);
+//	glutKeyboardFunc(teclado_cb);
+//	inicializacion();
+//	glutMainLoop();
+//	return 0;
+//}
 //
-//    initOpenGL();
-//    glutDisplayFunc(display);
-//    glutKeyboardFunc(keyboardNormal);
-//    glutSpecialFunc(keyboard);
-//    glutMainLoop();
-//    return 0;
+//void inicializacion(void) {
+//	glClearColor(1.0, 1.0, 1.0, 1.0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glEnable(GL_DEPTH_TEST);
+//}
+//
+//void display_cb(void) {
+//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//	plano3D();
+//	glPushMatrix();
+//	glScalef(facEsc, facEsc, facEsc);
+//	silla(0.0, 0.0, 0.0);
+//	glPopMatrix();
+//	glutSwapBuffers();
+//}
+//
+//void plano3D() {
+//	glBegin(GL_LINES);
+//	glColor3f(1.0, 0.0, 1.0); glVertex3i(0, 0, -20); glVertex3i(0, 0, 20);
+//	glColor3f(1.0, 0.0, 0.0); glVertex3i(-20, 0, 0); glVertex3i(20, 0, 0);
+//	glColor3f(0.0, 1.0, 0.0); glVertex3i(0, -20, 0); glVertex3i(0, 20, 0);
+//	glEnd();
+//	glFlush();
+//}
+//
+//void teclado_cb(GLubyte key, GLint x, GLint y) {
+//	switch (key) {
+//		/*case 49:
+//			mode = 1;
+//			break;
+//		case 50:
+//			mode = 2;
+//			break;*/
+//	case 27:
+//		exit(1);
+//		break;
+//	case 'x':
+//		// aqui  se procesa la tecla <x>
+//		glRotatef(5.0, 1.0, 0.0, 0.0);//cada que se preciona x, rota 5 grados
+//		break;
+//	case 'X':
+//		// aqui  se procesa la tecla <X>
+//		glRotatef(-5.0, 1.0, 0.0, 0.0);//cada que se preciona x, rota 5 grados
+//		break;
+//	case 'y':
+//		// aqui  se procesa la tecla <y>
+//		glRotatef(5.0, 0.0, 1.0, 0.0);
+//		break;
+//	case 'Y':
+//		// aqui  se procesa la tecla <Y>
+//		glRotatef(-5.0, 0.0, 1.0, 0.0);
+//		break;
+//	case 'z':
+//		// aqui  se procesa la tecla <z>
+//		glRotatef(5.0, 0.0, 0.0, 1.0);
+//		break;
+//	case 'Z':
+//		// aqui  se procesa la tecla <Z>
+//		glRotatef(-5.0, 0.0, 0.0, 1.0);
+//		break;
+//	case 'e':
+//		// aqui  se procesa la tecla <e>
+//		glRotatef(5.0, 1.0, 1.0, 1.0);
+//		break;
+//	case 'r':
+//		// aqui  se procesa la tecla <r>
+//		glLoadIdentity();//resetea los buffers
+//		angle = 0.0;
+//		break;
+//	case 'a':
+//		// aqui  se procesa la tecla <a>
+//		angle += 5;
+//		break;
+//	case '+':
+//		if (facEsc < 2)
+//			facEsc += 0.1;
+//		break;
+//	case '-':
+//		if (facEsc > 0.1)
+//			facEsc -= 0.1;
+//		break;
+//	default:
+//		break;
+//	}
+//	glutPostRedisplay();
+//}
+//
+//void prisma(float l, float h, float d, float x, float y, float z, Colores color) {
+//	asignarColor(color);
+//	glBegin(GL_QUADS);
+//	// Cara frontal
+//	glVertex3f(x, y, z);
+//	glVertex3f(x, y + h, z);
+//	glVertex3f(x + l, y + h, z);
+//	glVertex3f(x + l, y, z);
+//	glEnd();
+//	// Cara posterior
+//	glBegin(GL_QUADS);
+//	glVertex3f(x, y, z - d);
+//	glVertex3f(x, y + h, z - d);
+//	glVertex3f(x + l, y + h, z - d);
+//	glVertex3f(x + l, y, z - d);
+//	glEnd();
+//	// Cara inferior
+//	glBegin(GL_QUADS);
+//	glVertex3f(x, y, z);
+//	glVertex3f(x, y, z - d);
+//	glVertex3f(x + l, y, z - d);
+//	glVertex3f(x + l, y, z);
+//	glEnd();
+//	// Cara superior
+//	glBegin(GL_QUADS);
+//	glVertex3f(x, y + h, z);
+//	glVertex3f(x, y + h, z - d);
+//	glVertex3f(x + l, y + h, z - d);
+//	glVertex3f(x + l, y + h, z);
+//	glEnd();
+//	// Lados
+//	glBegin(GL_QUADS);
+//	glVertex3f(x, y, z);
+//	glVertex3f(x, y + h, z);
+//	glVertex3f(x, y + h, z - d);
+//	glVertex3f(x, y, z - d);
+//	glEnd();
+//	glBegin(GL_QUADS);
+//	glVertex3f(x + l, y, z);
+//	glVertex3f(x + l, y + h, z);
+//	glVertex3f(x + l, y + h, z - d);
+//	glVertex3f(x + l, y, z - d);
+//	glEnd();
+//}
+//
+//void silla(float x, float y, float z) {
+//	// Asiento
+//	prisma(1.4, 0.2, 1.0, x - 1.0, y, z, DGREY);
+//	// Patas
+//	prisma(0.2, 1.0, 0.2, x - 1.0, y - 1.0, z, GREY);
+//	prisma(0.2, 1.0, 0.2, x + 0.2, y - 1.0, z, GREY);
+//	prisma(0.2, 1.4, 0.2, x - 1.0, y - 1.0, z - 1.0, GREY);
+//	prisma(0.2, 1.4, 0.2, x + 0.2, y - 1.0, z - 1.0, GREY);
+//	// Respaldo
+//	prisma(1.4, 1.0, 0.2, x - 1.0, y + 0.4, z - 1.0, DGREY);
 //}
