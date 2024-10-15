@@ -276,7 +276,7 @@
 //
 //void monitor(float x, float y, float z) {
 //	//Base
-//	prisma(1.6, 0.2, 1.4, 1.2 + x, 0 + y, 0 + z, GREY);
+//	prismaMulticolor(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, DGREY, DGREY, GREY, GREY, DGREY,DGREY);
 //	//Pantalla
 //	prismaMulticolor(4.0, 3.0, 0.2, 0 + x, 1.0 + y, -0.5 + z, BLACK, GREY, GREY, GREY, GREY, GREY);
 //	//Marco horizontal inferior
