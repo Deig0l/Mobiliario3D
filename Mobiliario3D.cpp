@@ -265,7 +265,7 @@
 //	//Boton
 //	prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
 //}
-// //Pene
+//
 //void mouse(float x, float y, float z) {
 //	//cuerpo principal
 //	prisma(0.1,0.1,0.2,0,0,0,LGREY);

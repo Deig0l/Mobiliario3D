@@ -1,114 +1,53 @@
-#include <GL/glut.h>
-
-float angleX = 0.0f;
-float angleY = 0.0f;
-float facEsc = 1;
-
-// Función para dibujar el mouse
-void drawMouse() {
-
-    //Lineas de los ejes
-    glBegin(GL_LINES);
-
-    //Eje x
-    glColor3f(1, 0, 0);//rojo
-    glVertex3f(-300, 0, 0);
-    glVertex3f(300, 0, 0);
-
-    //Eje y
-    glColor3f(0, 1, 0);//verde
-    glVertex3f(0, -300, 0);
-    glVertex3f(0, 300, 0);
-
-    //Eje z
-    glColor3f(0, 0, 1);//azul
-    glVertex3f(0, 0, -300);
-    glVertex3f(0, 0, 300);
-
-    glEnd();
-
-    // Dibujar mouse
-    glPushMatrix();
-    glColor3f(0.3f, 0.3f, 0.3f);
-    glScalef(0.1f, 0.05f, 0.2f);
-    glutSolidCube(1.0f);
-    glPopMatrix();
-
-    //Teclado
-    glPushMatrix();
-    glColor3f(0.3f, 0.3f, 0.3f);
-    glTranslatef(-0.5,0,0);
-    glScalef(0.4f, 0.03f, 0.2f);
-    glutSolidCube(1.0f);
-    glPopMatrix();
-}
-
-void keyboardNormal(unsigned char key, int x, int y) {
-    switch (key) {
-    case 'r':
-        angleX = 0.0f;
-        angleY = 0.0f;
-        break;
-    case '+':
-        facEsc += 0.1;
-        break;
-    case '-':
-        facEsc -= 0.1;
-        break;
-    }
-    glutPostRedisplay();
-}
-
-void keyboard(int key, int x, int y) {
-    switch (key) {
-    case GLUT_KEY_LEFT:  // Flecha izquierda
-        angleY -= 5.0f;
-        break;
-    case GLUT_KEY_RIGHT: // Flecha derecha
-        angleY += 5.0f;
-        break;
-    case GLUT_KEY_UP:    // Flecha arriba
-        angleX -= 5.0f;
-        break;
-    case GLUT_KEY_DOWN:  // Flecha abajo
-        angleX += 5.0f;
-        break;
-    }
-    glutPostRedisplay();
-}
-
 #include <windows.h>
 #include <cmath>
 #include <GL/glut.h>
+
+float facEsc = 1;
+
+float angulox = 0.0f;
+float anguloy = 0.0f;
+float anguloz = 0.0f;
 
 enum Colores {
 	BLACK, WHITE, RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN, GREY, LGREY, DGREY
 };
 
+// Función para dibujar el mouse
+void drawMouse() {
+	// Dibujar mouse
+	glPushMatrix();
+	glColor3f(0.3f, 0.3f, 0.3f);
+	glScalef(0.1f, 0.05f, 0.2f);
+	glutSolidCube(1.0f);
+	glPopMatrix();
+
+	//Teclado
+	glPushMatrix();
+	glColor3f(0.3f, 0.3f, 0.3f);
+	glTranslatef(-0.5, 0, 0);
+	glScalef(0.4f, 0.03f, 0.2f);
+	glutSolidCube(1.0f);
+	glPopMatrix();
+}
+
 void inicializacion(void);
-void displayMobiliario();
-void tecladoMobiliario(unsigned char key, int x, int y);
-void ejes3D();
+void displayMK();
+void tecladoMK(unsigned char key, int x, int y);
 void asignarColor(Colores color);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
 void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
-void monitor(float x, float y, float z);
-void pc(float x, float y, float z);
+void ejes3D();
 void mouse(float x, float y, float z);
 void keyboard(float x, float y, float z);
-void mesa(float x, float y, float z);
-
-int facEsc = 1;
-
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Mouse & Keyboard 3D");
-	glutDisplayFunc(displayMobiliario);
-	glutKeyboardFunc(tecladoMobiliario);
+	glutDisplayFunc(displayMK);
+	glutKeyboardFunc(tecladoMK);
 	inicializacion();
 	glutMainLoop();
 	return 0;
@@ -123,23 +62,35 @@ void inicializacion(void) {
 	glEnable(GL_DEPTH_TEST);
 }
 
-void displayMobiliario() {
+void displayMK() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	ejes3D();
+
 	glPushMatrix();
+
+	glRotatef(angulox, 1.0, 0.0, 0.0);
+	glRotatef(anguloy, 0.0, 1.0, 0.0);
+	glRotatef(anguloz, 0.0, 0.0, 1.0);
+
+	ejes3D();
+
 	glScalef(facEsc, facEsc, facEsc);
-	pc(5.0, 0, 0);
-	monitor(0, 0, -2.0);
 	mouse(0, 0, 0);
 	keyboard(0, 0, 0);
-	mesa(0, 0, 0);
+
 	glPopMatrix();
+
 	glutSwapBuffers();
 }
 
-void tecladoMobiliario(unsigned char key, int x, int y) {
+void tecladoMK(unsigned char key, int x, int y) {
 	switch (key) {
 	case 'r':
+		//Se limpian los angulos
+		angulox = 0;
+		anguloy = 0;
+		anguloz = 0;
+		facEsc = 1;
+		glLoadIdentity();
 		break;
 	case '+':
 		facEsc += 0.1;
@@ -147,30 +98,26 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 	case '-':
 		facEsc -= 0.1;
 		break;
+	case 'x':
+		angulox += 5.0;
+		break;
+	case 'y':
+		anguloy += 5.0;
+		break;
+	case 'z':
+		anguloz += 5.0;
+		break;
+	case 'X':
+		angulox -= 5.0;
+		break;
+	case 'Y':
+		anguloy -= 5.0;
+		break;
+	case 'Z':
+		anguloz -= 5.0;
+		break;
 	}
 	glutPostRedisplay();
-}
-
-void ejes3D() {
-	//Lineas de los ejes
-	glBegin(GL_LINES);
-
-	//Eje x
-	glColor3f(1, 0, 0);//rojo
-	glVertex3f(-300, 0, 0);
-	glVertex3f(300, 0, 0);
-
-	//Eje y
-	glColor3f(0, 1, 0);//verde
-	glVertex3f(0, -300, 0);
-	glVertex3f(0, 300, 0);
-
-	//Eje z
-	glColor3f(0, 0, 1);//azul
-	glVertex3f(0, 0, -300);
-	glVertex3f(0, 0, 300);
-
-	glEnd();
 }
 
 void asignarColor(Colores color) {
@@ -311,13 +258,35 @@ void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	glEnd();
 }
 
+void ejes3D() {
+	//Lineas de los ejes
+	glBegin(GL_LINES);
+
+	//Eje x
+	glColor3f(1, 0, 0);//rojo
+	glVertex3f(-300, 0, 0);
+	glVertex3f(300, 0, 0);
+
+	//Eje y
+	glColor3f(0, 1, 0);//verde
+	glVertex3f(0, -300, 0);
+	glVertex3f(0, 300, 0);
+
+	//Eje z
+	glColor3f(0, 0, 1);//azul
+	glVertex3f(0, 0, -300);
+	glVertex3f(0, 0, 300);
+
+	glEnd();
+}
+
 void mouse(float x, float y, float z) {
 	//cuerpo principal
-	prisma(0.1, 0.1, 0.2, 0, 0, 0, LGREY);
+	prismaMulticolor(0.1, 0.07, 0.23, 0, 0, 0, LGREY,BLACK,BLACK, BLUE, DGREY, DGREY);
 	//ruedita
-	prisma(0.1, 0.1, 0.1, 0, 0.1, 0.1, BLACK);
+	prisma(0.02, 0.07, 0.05, 0.035, 0.0025, -0.1, BLACK);
 }
 
 void keyboard(float x, float y, float z) {
-
+	prismaMulticolor(0.5,0.07,0.2,-1,0,0,DGREY,DGREY,BLACK,LGREY,DGREY,DGREY);
 }
