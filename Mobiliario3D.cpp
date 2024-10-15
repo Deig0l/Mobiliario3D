@@ -73,6 +73,9 @@ void displayMobiliario() {
 
 void tecladoMobiliario(unsigned char key, int x, int y) {
 	switch (key) {
+			case 27:
+				exit(1);
+				break;
 			case 'r':
 				//Se limpian los angulos
 				angulox = 0;
