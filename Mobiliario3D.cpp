@@ -274,7 +274,7 @@
 //}
 //
 //void keyboard(float x, float y, float z) {
-//	prismaMulticolor();
+//	
 //}
 //
 //void mesa(float x, float y, float z){}
