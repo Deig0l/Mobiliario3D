@@ -171,6 +171,7 @@ void asignarColor(Colores color) {
 	}
 };
 
+//Una unidad son 10cm para los primas
 void prisma(float l, float h, float d, float x, float y, float z, Colores color) {
 	asignarColor(color);
 	//Cara frontal
@@ -307,13 +308,13 @@ void pc(float x, float y, float z) {
 
 void mouse(float x, float y, float z) {
 	//cuerpo principal
-	prismaMulticolor(0.1, 0.07, 0.23, 0, 0, 0, LGREY, BLACK, BLACK, BLUE, DGREY, DGREY);
+	prismaMulticolor(1, 0.7, 2.3, 0, 0, 0, LGREY, BLACK, BLACK, BLUE, DGREY, DGREY);
 	//ruedita
-	prisma(0.02, 0.07, 0.05, 0.035, 0.0025, -0.1, BLACK);
+	prisma(0.2, 0.7, 0.5, 0.035, 0.0025, -0.1, BLACK);
 }
 
 void keyboard(float x, float y, float z) {
-	prismaMulticolor(0.5, 0.07, 0.2, -1, 0, 0, DGREY, DGREY, BLACK, LGREY, DGREY, DGREY);
+	prismaMulticolor(5, 0.25, 2, -1, 0, 0, DGREY, DGREY, BLACK, LGREY, DGREY, DGREY);
 }
 
 void mesa(float x, float y, float z){
