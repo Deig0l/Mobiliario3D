@@ -59,12 +59,14 @@ void displayMobiliario() {
 	glScalef(facEsc, facEsc, facEsc);
 
 	ejes3D();
+	//mesa(0, -5.0, 1.0);
+	/*mesa(4.5, 4.5, 0.0);
 	pc(5.0, 0, 0);
 	monitor(0, 0, -2.0);
 	mouse(0,0,-1);
-	keyboard(0,0,-1);
-	mesa(0,-5.0,1.0);
-	silla(0,-2,-3);
+	keyboard(0,0,-1);*/
+	//glRotatef(180.0, 0.0, 1.0, 0.0);
+	silla(0.0, 0.0 , 0.0);
 
 	glPopMatrix();
 
@@ -335,14 +337,24 @@ void mesa(float x, float y, float z) {
 }
 
 void silla(float x, float y, float z) {
+	//// Asiento 
+	//prisma(3.0, 0.45, 2.4, x - 0.9, y, z + 1.0, DGREY);
+	//// Patas 
+	//prisma(0.35, 2.0, 0.35, x - 0.9, y - 2.0, z + 0.95, GREY); //pata frontal derecha
+	//prisma(0.35, 2.0, 0.35, x + 1.7, y - 2.0, z + 0.95, GREY); //pata frontal izquierda
+	//prisma(0.35, 2.9, 0.35, x - 0.9, y - 2.0, z - 1.35, GREY); //pata trasera derecha
+	//prisma(0.35, 2.9, 0.35, x + 1.7, y - 2.0, z - 1.35, GREY); //pata trasera izquierda
+	//// Respaldo 
+	//prisma(3.1, 2.4, 0.45, x - 0.955, y + 0.8, z - 1.3, DGREY);
+
 	// Asiento 
-	prisma(3.0, 0.45, 2.4, x - 0.9, y, z + 1.0, DGREY);
+	prisma(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z + 0.05, DGREY);
 	// Patas 
-	prisma(0.35, 2.0, 0.35, x - 0.9, y - 2.0, z + 0.95, GREY); //pata frontal derecha
-	prisma(0.35, 2.0, 0.35, x + 1.7, y - 2.0, z + 0.95, GREY); //pata frontal izquierda
-	prisma(0.35, 2.9, 0.35, x - 0.9, y - 2.0, z - 1.35, GREY); //pata trasera derecha
-	prisma(0.35, 2.9, 0.35, x + 1.7, y - 2.0, z - 1.35, GREY); //pata trasera izquierda
+	prisma(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z + 0.0, GREY); //pata frontal derecha
+	prisma(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z + 0.0, GREY); //pata frontal izquierda
+	prisma(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z - 2.3, GREY); //pata trasera derecha
+	prisma(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z - 2.3, GREY); //pata trasera izquierda
 	// Respaldo 
-	prisma(3.1, 2.4, 0.45, x - 0.955, y + 0.8, z - 1.3, DGREY);
+	prisma(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z - 2.25, DGREY);
 }
 
