@@ -59,14 +59,14 @@ void displayMobiliario() {
 	glScalef(facEsc, facEsc, facEsc);
 
 	ejes3D();
-	//mesa(0, -5.0, 1.0);
+	mesa(0, 0.0, 0.0);
 	/*mesa(4.5, 4.5, 0.0);
 	pc(5.0, 0, 0);
 	monitor(0, 0, -2.0);
 	mouse(0,0,-1);
 	keyboard(0,0,-1);*/
-	//glRotatef(180.0, 0.0, 1.0, 0.0);
-	silla(0.0, 0.0 , 0.0);
+	/*glRotatef(180.0, 0.0, 1.0, 0.0);
+	silla(-6.0, 0.0 , 2.75);*/
 
 	glPopMatrix();
 
@@ -323,30 +323,19 @@ void keyboard(float x, float y, float z) {
 }
 
 void mesa(float x, float y, float z) {
+	prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z - 0.35, GREY);  // Tablero de la mesa
 
-	prisma(9.0, 0.25, 4.5, x - 4.5, y, z, GREY);  // Tablero de la mesa
 
+	prisma(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, BLACK); // Pata acostada izquierda 
+	prisma(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, BLACK); // Pata acostada derecha 
+	prisma(0.35, 4.5, 0.8, x + 0.3, y + 0.0, z - 0.35, DGREY); // Pata izquierda 
+	prisma(0.35, 4.5, 0.8, x + 8.4, y + 0.0, z - 0.35, DGREY); // Pata derecha 
 
-	prisma(0.35, 0.8, 4.5, x - 4.2, y - 4.5, z + 0.35, BLACK); // Pata acostada izquierda 
-	prisma(0.35, 0.8, 4.5, x + 3.9, y - 4.5, z + 0.35, BLACK); // Pata acostada derecha 
-	prisma(0.35, 4.5, 0.8, x - 4.2, y - 4.5, z + 0.0, DGREY); // Pata izquierda 
-	prisma(0.35, 4.5, 0.8, x + 3.9, y - 4.5, z + 0.0, DGREY); // Pata derecha 
-
-	prisma(8.5, 2.3, 0.1, x - 4.25, y - 2.2, z - 0.05, BLACK); // Rectangulo negro
+	prisma(8.5, 2.3, 0.1, x + 0.25, y +2.3, z - 0.4, BLACK); // Rectangulo negro
 
 }
 
 void silla(float x, float y, float z) {
-	//// Asiento 
-	//prisma(3.0, 0.45, 2.4, x - 0.9, y, z + 1.0, DGREY);
-	//// Patas 
-	//prisma(0.35, 2.0, 0.35, x - 0.9, y - 2.0, z + 0.95, GREY); //pata frontal derecha
-	//prisma(0.35, 2.0, 0.35, x + 1.7, y - 2.0, z + 0.95, GREY); //pata frontal izquierda
-	//prisma(0.35, 2.9, 0.35, x - 0.9, y - 2.0, z - 1.35, GREY); //pata trasera derecha
-	//prisma(0.35, 2.9, 0.35, x + 1.7, y - 2.0, z - 1.35, GREY); //pata trasera izquierda
-	//// Respaldo 
-	//prisma(3.1, 2.4, 0.45, x - 0.955, y + 0.8, z - 1.3, DGREY);
-
 	// Asiento 
 	prisma(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z + 0.05, DGREY);
 	// Patas 
