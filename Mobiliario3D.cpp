@@ -320,18 +320,18 @@ void keyboard(float x, float y, float z) {
 	prismaMulticolor(5, 0.25, 2, -1, 0, 0, DGREY, DGREY, BLACK, LGREY, DGREY, DGREY);
 }
 
-void mesa(float x, float y, float z){
-	// Tablero de la mesa
-	prisma(5.0, 0.2, 2.5, x - 2.5, y, z, GREY);
+void mesa(float x, float y, float z) {
 
-	prisma(0.2, 0.4, 2.5, x - 2.4, y - 3.0, z + 0.2, BLACK); // Pata acostada ajustada
-	prisma(0.2, 0.4, 2.5, x + 2.2, y - 3.0, z + 0.2, BLACK); // Pata acostada ajustada
+	prisma(9.0, 0.25, 4.5, x - 4.5, y, z, GREY);  // Tablero de la mesa
 
-	prisma(0.2, 3.0, 0.6, x - 2.4, y - 3.0, z + 0.0, DGREY); // Pata de la mesa Izquierda
-	prisma(0.2, 3.0, 0.6, x + 2.2, y - 3.0, z + 0.0, DGREY); // Pata de la mesa Derecha
 
-	// Rectángulo negro
-	prisma(4.8, 1.4, 0.1, x - 2.4, y - 1.4, z - 0.05, BLACK);
+	prisma(0.35, 0.8, 4.5, x - 4.2, y - 4.5, z + 0.35, BLACK); // Pata acostada izquierda 
+	prisma(0.35, 0.8, 4.5, x + 3.9, y - 4.5, z + 0.35, BLACK); // Pata acostada derecha 
+	prisma(0.35, 4.5, 0.8, x - 4.2, y - 4.5, z + 0.0, DGREY); // Pata izquierda 
+	prisma(0.35, 4.5, 0.8, x + 3.9, y - 4.5, z + 0.0, DGREY); // Pata derecha 
+
+	prisma(8.5, 2.3, 0.1, x - 4.25, y - 2.2, z - 0.05, BLACK); // Rectangulo negro
+
 }
 
 void silla(float x, float y, float z) {
