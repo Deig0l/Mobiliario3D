@@ -66,10 +66,8 @@ void displayMobiliario() {
 
 	ejes3D();
 	
-	generarMobiSalon(0.0, 0.0, 0.0, 4, 7, 2.0);
-	proyector(27.0, 15.0, 10.0);
-	//generarMobiSalon(-3.0, 0.0, -4.0, 2, 3, 2.0);
-
+	generarMobiSalon(-31.5, 0.0, 0.0, 4, 7, 2.0);
+	proyector(-4.5, 15.0, 10.0);
 		
 	glPopMatrix();
 
