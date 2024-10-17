@@ -15,8 +15,11 @@ void teclado_cb(GLubyte key, GLint x, GLint y);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
 void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
+void cilindro(float x, float y, float z, float radio, float height,
+	Colores lado, Colores tapa);
 void monitor(float x, float y, float z);
 void pc(float x, float y, float z);
+void proyector(float x, float y, float z);
 
 float angle = 0.0;
 int lado = 3;
@@ -92,7 +95,8 @@ void display_cb(void) {
 	glScalef(facEsc, facEsc, facEsc);
 	//pc(5.0, 0, 0);
 	//monitor(0, 0, -2.0);
-
+	//cilindro(0.0, 0.0, 0.0, 0.4, 0.2);
+	cilindro(1.0, 2.0, 0.0, 0.4, 0.2, BLACK, GREY);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -273,6 +277,36 @@ void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	glVertex3f(x + l, y + h, z - d);
 	glVertex3f(x + l, y, z - d);
 	glEnd();
+}
+
+void cilindro(float x, float y, float z, float radio, float height,
+	Colores lado, Colores tapa) {
+	glPushMatrix();
+	glTranslatef(x, y, z);
+
+	glPushMatrix();
+	GLUquadricObj* cilindro;
+	cilindro = gluNewQuadric();
+	asignarColor(lado);
+	gluCylinder(cilindro, radio, radio, height, 15, 10);
+	glPopMatrix();
+
+	glPushMatrix();
+	GLUquadricObj* tapaAbajo;
+	tapaAbajo = gluNewQuadric();
+	asignarColor(tapa);
+	gluDisk(tapaAbajo, 0.0, radio, 15.0, 10.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	GLUquadricObj* tapaArriba;
+	tapaArriba = gluNewQuadric();
+	glTranslatef(0.0, 0.0, height);
+	asignarColor(tapa);
+	gluDisk(tapaArriba, 0.0, radio, 15.0, 10.0);
+	glPopMatrix();
+
+	glPopMatrix();
 }
 
 void monitor(float x, float y, float z) {
