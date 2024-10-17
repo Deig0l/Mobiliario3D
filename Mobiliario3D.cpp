@@ -385,7 +385,7 @@ void silla(float x, float y, float z) {
 void proyector(float x, float y, float z) {
 	prisma(0.5, 4.0, 0.5, 1.25 + x, 0.9 + y, -1.0 + z, BLACK);
 	prismaMulticolor(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, GREY, GREY, LGREY, LGREY, GREY, GREY);
-	cilindro(0.8 + x, 0.45 + y, 0.0 + z, 0.4, 0.2, BLACK, LBLUE);
+	cilindro(2.2 + x, 0.45 + y, -2.7 + z, 0.4, 0.2, BLACK, LBLUE);
 }
 
 void unidadMobiliario(float x, float y, float z) {
