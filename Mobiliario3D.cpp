@@ -25,6 +25,8 @@ void mouse(float x, float y, float z);
 void keyboard(float x, float y, float z);
 void mesa(float x, float y, float z);
 void silla(float x, float y, float z);
+void unidadMobiliario(float x, float y, float z);
+void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado);
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
@@ -42,7 +44,8 @@ void inicializacion(void) {
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
+	//glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
+	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -60,14 +63,8 @@ void displayMobiliario() {
 
 	ejes3D();
 	
-	
-	/*mesa(4.5, 4.5, 0.0);
-	pc(5.0, 0, 0);
-	monitor(0, 0, -2.0);
-	mouse(0,0,-1);
-	keyboard(0,0,-1);*/
-	mesa(0.0, 0.0, 0.0);
-	//silla(3.0, 0.0 , 0.0);
+	generarMobiSalon(0.0, 0.0, 0.0, 9, 7, 2.0);
+	//generarMobiSalon(-3.0, 0.0, -4.0, 2, 3, 2.0);
 		
 	glPopMatrix();
 
@@ -314,18 +311,17 @@ void pc(float x, float y, float z) {
 
 void mouse(float x, float y, float z) {
 	//cuerpo principal
-	prismaMulticolor(1, 0.7, 2.3, 0, 0, 0, LGREY, BLACK, BLACK, BLUE, DGREY, DGREY);
+	prismaMulticolor(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, GREY, BLACK, BLACK, BLUE, DGREY, DGREY);
 	//ruedita
-	prisma(0.2, 0.7, 0.5, 0.035, 0.0025, -0.1, BLACK);
+	prisma(0.2, 0.7, 0.5, 0.035 + x, 0.0025 + y, -0.10 + z, BLACK);
 }
 
 void keyboard(float x, float y, float z) {
-	prismaMulticolor(5, 0.25, 2, -1, 0, 0, DGREY, DGREY, BLACK, LGREY, DGREY, DGREY);
+	prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
 
 void mesa(float x, float y, float z) {
-	prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, GREY);  // Tablero de la mesa
-
+	prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, LGREY);  // Tablero de la mesa
 
 	prisma(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, BLACK); // Pata acostada izquierda 
 	prisma(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, BLACK); // Pata acostada derecha 
@@ -348,3 +344,22 @@ void silla(float x, float y, float z) {
 	prisma(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, DGREY);
 }
 
+void unidadMobiliario(float x, float y, float z) {
+	mesa(0.0 + x, 0.0 + y, -0.9 + z);
+	silla(3.0 + x, 0.0 + y, 0.0 + z);
+	pc(0.3 + x, 4.75 + y, -1.0 + z);
+	monitor(3.0 + x, 4.75 + y, -3.3 + z);
+	mouse(7.8 + x, 4.75 + y, -1.0 + z);
+	keyboard(3.5 + x, 4.75 + y, -1.0 + z);
+}
+
+void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado) {
+	for (int i = 0; i < filas; i++) {
+		for (int j = 0; j < mesas; j++) {
+			unidadMobiliario(0.0 + x, 0.0 + y, +5.4 + z);
+			x += 9.0;
+		}
+		x -= (9.0 * mesas);
+		z += (5.4 + espaciado);
+	}
+}
