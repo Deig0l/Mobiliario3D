@@ -21,7 +21,7 @@
     <ClCompile Include="Mesa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PC&amp;Monitor.cpp">
+    <ClCompile Include="PC&amp;Monitor&amp;Proyector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mouse&amp;Keyboard.cpp">

@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Mobiliario3D.cpp" />
     <ClCompile Include="Mesa.cpp" />
-    <ClCompile Include="PC&amp;Monitor.cpp" />
+    <ClCompile Include="PC&amp;Monitor&amp;Proyector.cpp" />
     <ClCompile Include="Mouse&amp;Keyboard.cpp" />
     <ClCompile Include="Silla.cpp" />
   </ItemGroup>
