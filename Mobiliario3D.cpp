@@ -15,6 +15,7 @@ bool mostrarEjes = true;
 void inicializacion(void);
 void displayMobiliario();
 void tecladoMobiliario(unsigned char key, int x, int y);
+void tecladoEspecialMobiliario(int key, int x, int y);
 void ejes3D();
 void asignarColor(Colores color);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
@@ -39,6 +40,7 @@ int main(int argc, char** argv) {
 	glutCreateWindow("Mobiliario 3D");
 	glutDisplayFunc(displayMobiliario);
 	glutKeyboardFunc(tecladoMobiliario);
+	glutSpecialFunc(tecladoEspecialMobiliario);
 	inicializacion();
 	glutMainLoop();
 	return 0;
@@ -117,6 +119,33 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 			case 'Z':
 				anguloz -= 5.0;
 				break;
+	}
+	glutPostRedisplay();
+}
+
+void tecladoEspecialMobiliario(int key, int x, int y) {
+	switch (key)
+	{
+		case GLUT_KEY_UP:
+			angulox += 5.0;
+			break;
+		case GLUT_KEY_DOWN:
+			angulox -= 5.0;
+			break;
+		case GLUT_KEY_RIGHT:
+			anguloy += 5.0;
+			break;
+		case GLUT_KEY_LEFT:
+			anguloy -= 5.0;
+			break;
+		case GLUT_KEY_PAGE_UP:
+			anguloz += 5.0;
+			break;
+		case GLUT_KEY_PAGE_DOWN:
+			anguloz -= 5.0;
+			break;
+		default:
+			break;
 	}
 	glutPostRedisplay();
 }
