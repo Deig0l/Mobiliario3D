@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <cmath>
 #include <GL/glut.h>
+#include <iostream>
 
 enum Colores {
 	BLACK, WHITE, RED, GREEN, BLUE, LBLUE, YELLOW, MAGENTA, CYAN, GREY, LGREY, DGREY
@@ -16,6 +17,7 @@ void inicializacion(void);
 void displayMobiliario();
 void tecladoMobiliario(unsigned char key, int x, int y);
 void tecladoEspecialMobiliario(int key, int x, int y);
+void ratonMobiliario(int button, int state, int x, int y);
 void ejes3D();
 void asignarColor(Colores color);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
@@ -41,6 +43,7 @@ int main(int argc, char** argv) {
 	glutDisplayFunc(displayMobiliario);
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
+	glutMouseFunc(ratonMobiliario);
 	inicializacion();
 	glutMainLoop();
 	return 0;
@@ -149,6 +152,32 @@ void tecladoEspecialMobiliario(int key, int x, int y) {
 	}
 	glutPostRedisplay();
 }
+
+void ratonMobiliario(int btn, int state, int x, int y) {
+	if (state == GLUT_DOWN) {
+		switch (btn) {
+		case GLUT_LEFT_BUTTON:
+			std::cout << "left click at: (" << x << ", " << y << ")\n";
+			break;
+		case GLUT_RIGHT_BUTTON:
+			std::cout << "right click at: (" << x << ", " << y << ")\n";
+			break;
+		case GLUT_MIDDLE_BUTTON:
+			std::cout << "middle click at: (" << x << ", " << y << ")\n";
+			break;
+		}
+	}
+	if (btn == 3) { // Rueda hacia arriba
+		facEsc += 0.1f;
+	}
+	else if (btn == 4) { // Rueda hacia abajo
+		facEsc -= 0.1f;
+		if (facEsc < 0.1f) facEsc = 0.1f;  // Evitar zoom negativo o muy pequeño
+	}
+	std::cout << "facEsc: " << facEsc << std::endl;  // Verificación de cambio en facEsc
+	glutPostRedisplay();
+}
+
 
 void ejes3D() {
 	//Lineas de los ejes
