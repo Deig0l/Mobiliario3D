@@ -10,6 +10,7 @@ float angulox = 0.0f;
 float anguloy = 0.0f;
 float anguloz = 0.0f;
 float facEsc = 1;
+bool mostrarEjes = true;
 
 void inicializacion(void);
 void displayMobiliario();
@@ -64,7 +65,9 @@ void displayMobiliario() {
 
 	glScalef(facEsc, facEsc, facEsc);
 
-	ejes3D();
+	if (mostrarEjes) {
+		ejes3D();
+	}
 	
 	generarMobiSalon(-31.5, 0.0, 0.0, 4, 7, 2.0);
 	proyector(-4.5, 15.0, 10.0);
@@ -76,8 +79,11 @@ void displayMobiliario() {
 
 void tecladoMobiliario(unsigned char key, int x, int y) {
 	switch (key) {
-			case 27:
+			case 27: //Esc
 				exit(1);
+				break;
+			case 32: //Espacio
+				mostrarEjes = !mostrarEjes;
 				break;
 			case 'r':
 				//Se limpian los angulos
