@@ -1,17 +1,22 @@
 #include <windows.h>
 #include <cmath>
-#include <GL/glut.h>
-//#include <GL/freeglut.h>
+//#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <iostream>
 
 enum Colores {
 	BLACK, WHITE, RED, GREEN, BLUE, LBLUE, YELLOW, MAGENTA, CYAN, GREY, LGREY, DGREY
 };
 
+int wheelDelta = 0;
 float angulox = 0.0f;
 float anguloy = 0.0f;
 float anguloz = 0.0f;
+float trasladox = 0.0f;
+float trasladoy = 0.0f;
+float trasladoz = 0.0f;
 float facEsc = 1;
+float posX, posY;
 bool mostrarEjes = true;
 
 void inicializacion(void);
@@ -19,6 +24,7 @@ void displayMobiliario();
 void tecladoMobiliario(unsigned char key, int x, int y);
 void tecladoEspecialMobiliario(int key, int x, int y);
 void ratonMobiliario(int button, int state, int x, int y);
+void arrastreRaton(int x, int y);
 void ejes3D();
 void asignarColor(Colores color);
 void prisma(float l, float h, float d, float x, float y, float z, Colores color);
@@ -45,6 +51,7 @@ int main(int argc, char** argv) {
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
+	glutMotionFunc(arrastreRaton);
 	inicializacion();
 	glutMainLoop();
 	return 0;
@@ -64,6 +71,8 @@ void displayMobiliario() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	glPushMatrix();
+
+	glTranslatef(trasladox, trasladoy, trasladoz);
 
 	glRotatef(angulox, 1.0, 0.0, 0.0);
 	glRotatef(anguloy, 0.0, 1.0, 0.0);
@@ -96,32 +105,35 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 				angulox = 0;
 				anguloy = 0;
 				anguloz = 0;
+				trasladox = 0;
+				trasladoy = 0;
+				trasladoz = 0;
 				facEsc = 1;
 				glLoadIdentity();
 				break;
 			case '+':
-				facEsc += 0.1;
+				facEsc += 0.1f;
 				break;
 			case '-':
-				facEsc -= 0.1;
+				facEsc -= 0.1f;
 				break;
 			case 'x':
-				angulox += 5.0;
+				angulox += 5.0f;
 				break;
 			case 'y':
-				anguloy += 5.0;
+				anguloy += 5.0f;
 				break;
 			case 'z':
-				anguloz += 5.0;
+				anguloz += 5.0f;
 				break;
 			case 'X':
-				angulox -= 5.0;
+				angulox -= 5.0f;
 				break;
 			case 'Y':
-				anguloy -= 5.0;
+				anguloy -= 5.0f;
 				break;
 			case 'Z':
-				anguloz -= 5.0;
+				anguloz -= 5.0f;
 				break;
 	}
 	glutPostRedisplay();
@@ -155,16 +167,14 @@ void tecladoEspecialMobiliario(int key, int x, int y) {
 }
 
 void ratonMobiliario(int btn, int state, int x, int y) {
+	x = (x - 300) / 3;
+	y = (300 - y) / 3;
 	if (state == GLUT_DOWN) {
 		switch (btn) {
 		case GLUT_LEFT_BUTTON:
+			posX = x;
+			posY = y;
 			std::cout << "left click at: (" << x << ", " << y << ")\n";
-			break;
-		case GLUT_RIGHT_BUTTON:
-			std::cout << "right click at: (" << x << ", " << y << ")\n";
-			break;
-		case GLUT_MIDDLE_BUTTON:
-			std::cout << "middle click at: (" << x << ", " << y << ")\n";
 			break;
 		}
 	}
@@ -179,6 +189,20 @@ void ratonMobiliario(int btn, int state, int x, int y) {
 	glutPostRedisplay();
 }
 
+void arrastreRaton(int x, int y) {
+	x = (x - 300) / 3;
+	y = (300 - y) / 3;
+	int deltaX = x - posX;
+	int deltaY = y - posY;
+
+	trasladox += deltaX * 0.3f; // Factor de ajuste para traslación en X
+	trasladoy -= deltaY * 0.3f; // Factor de ajuste para traslación en Y
+
+	posX = x;
+	posY = y;
+
+	glutPostRedisplay();
+}
 
 void ejes3D() {
 	//Lineas de los ejes
@@ -205,40 +229,40 @@ void ejes3D() {
 void asignarColor(Colores color) {
 	switch (color) {
 	case BLACK:
-		glColor3f(0.0, 0.0, 0.0);
+		glColor3f(0.0f, 0.0f, 0.0f);
 		break;
 	case WHITE:
-		glColor3f(1.0, 1.0, 1.0);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		break;
 	case RED:
-		glColor3f(1.0, 0.0, 0.0);
+		glColor3f(1.0f, 0.0f, 0.0f);
 		break;
 	case GREEN:
-		glColor3f(0.0, 1.0, 0.0);
+		glColor3f(0.0f, 1.0f, 0.0f);
 		break;
 	case BLUE:
-		glColor3f(0.0, 0.0, 1.0);
+		glColor3f(0.0f, 0.0f, 1.0f);
 		break;
 	case LBLUE:
-		glColor3f(0.23, 0.35, 0.41);
+		glColor3f(0.23f, 0.35f, 0.41f);
 		break;
 	case YELLOW:
-		glColor3f(1.0, 1.0, 0.0);
+		glColor3f(1.0f, 1.0f, 0.0f);
 		break;
 	case MAGENTA:
-		glColor3f(1.0, 0.0, 1.0);
+		glColor3f(1.0f, 0.0f, 1.0f);
 		break;
 	case CYAN:
-		glColor3f(0.0, 1.0, 1.0);
+		glColor3f(0.0f, 1.0f, 1.0f);
 		break;
 	case GREY:
-		glColor3f(0.5, 0.5, 0.5);
+		glColor3f(0.5f, 0.5f, 0.5f);
 		break;
 	case LGREY:
-		glColor3f(0.6, 0.6, 0.6);
+		glColor3f(0.6f, 0.6f, 0.6f);
 		break;
 	case DGREY:
-		glColor3f(0.2, 0.2, 0.2);
+		glColor3f(0.2f, 0.2f, 0.2f);
 		break;
 	default:
 		break;
@@ -362,7 +386,7 @@ void cilindro(float x, float y, float z, float radio, float height,
 	GLUquadricObj* tapaAbajo;
 	tapaAbajo = gluNewQuadric();
 	asignarColor(tapa);
-	gluDisk(tapaAbajo, 0.0, radio, 15.0, 10.0);
+	gluDisk(tapaAbajo, 0, radio, 15, 10);
 	glPopMatrix();
 
 	glPushMatrix();
