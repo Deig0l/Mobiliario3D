@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <cmath>
-//#include <GL/glut.h>
-#include <GL/freeglut.h>
+#include <GL/glut.h>
+//#include <GL/freeglut.h>
 #include <iostream>
 
 enum Colores {
@@ -169,23 +169,17 @@ void tecladoEspecialMobiliario(int key, int x, int y) {
 void ratonMobiliario(int btn, int state, int x, int y) {
 	x = (x - 300) / 3;
 	y = (300 - y) / 3;
-	if (state == GLUT_DOWN) {
-		switch (btn) {
-		case GLUT_LEFT_BUTTON:
-			posX = x;
-			posY = y;
-			std::cout << "left click at: (" << x << ", " << y << ")\n";
-			break;
-		}
+	if (state == GLUT_DOWN && GLUT_LEFT_BUTTON) {
+			posX = (float)x;
+			posY = (float)y;
 	}
 	if (btn == 3) { // Rueda hacia arriba
 		facEsc += 0.1f;
 	}
 	else if (btn == 4) { // Rueda hacia abajo
 		facEsc -= 0.1f;
-		if (facEsc < 0.1f) facEsc = 0.1f;  // Evitar zoom negativo o muy pequeño
+		if (facEsc < 0.1f) facEsc = 0.1f;  // Evita zoom muy pequeño
 	}
-	std::cout << "facEsc: " << facEsc << std::endl;  // Verificación de cambio en facEsc
 	glutPostRedisplay();
 }
 
