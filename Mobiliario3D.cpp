@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <cmath>
-#include <GL/glut.h>
-//#include <GL/freeglut.h>
+//#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include <iostream>
 
 enum Colores {
@@ -18,6 +18,7 @@ float trasladoz = 0.0f;
 float facEsc = 1;
 float posX, posY;
 bool mostrarEjes = true;
+bool mousePressed = false;
 
 void inicializacion(void);
 void displayMobiliario();
@@ -169,10 +170,18 @@ void tecladoEspecialMobiliario(int key, int x, int y) {
 void ratonMobiliario(int btn, int state, int x, int y) {
 	x = (x - 300) / 3;
 	y = (300 - y) / 3;
-	if (state == GLUT_DOWN && GLUT_LEFT_BUTTON) {
-			posX = (float)x;
-			posY = (float)y;
+
+	if (btn == GLUT_LEFT_BUTTON) {
+		if (state == GLUT_DOWN) {
+			mousePressed = true;
+			posX = static_cast<float>(x);
+			posY = static_cast<float>(y);
+		}
+		else if (state == GLUT_UP) {
+			mousePressed = false;
+		}
 	}
+
 	if (btn == 3) { // Rueda hacia arriba
 		facEsc += 0.1f;
 	}
@@ -180,17 +189,20 @@ void ratonMobiliario(int btn, int state, int x, int y) {
 		facEsc -= 0.1f;
 		if (facEsc < 0.1f) facEsc = 0.1f;  // Evita zoom muy pequeño
 	}
+
 	glutPostRedisplay();
 }
 
 void arrastreRaton(int x, int y) {
+	if (!mousePressed) return; // Solo realiza el arrastre si el mouse está presionado
+
 	x = (x - 300) / 3;
 	y = (300 - y) / 3;
 	int deltaX = x - posX;
 	int deltaY = y - posY;
 
 	trasladox += deltaX * 0.3f; // Factor de ajuste para traslación en X
-	trasladoy -= deltaY * 0.3f; // Factor de ajuste para traslación en Y
+	trasladoy += deltaY * 0.3f; // Factor de ajuste para traslación en Y
 
 	posX = x;
 	posY = y;
