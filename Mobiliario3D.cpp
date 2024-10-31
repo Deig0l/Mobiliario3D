@@ -18,7 +18,8 @@ float trasladoz = 0.0f;
 float facEsc = 1;
 float posX, posY;
 bool mostrarEjes = true;
-bool mousePressed = false;
+bool mostrarControles = true;
+bool mousePresionado = false;
 
 void inicializacion(void);
 void displayMobiliario();
@@ -42,6 +43,8 @@ void silla(float x, float y, float z);
 void proyector(float x, float y, float z);
 void unidadMobiliario(float x, float y, float z);
 void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado);
+void writeBitmapString(void* font, const char* string);
+void controlesMensaje();
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
@@ -70,7 +73,7 @@ void inicializacion(void) {
 
 void displayMobiliario() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	glPushMatrix();
 
 	glTranslatef(trasladox, trasladoy, trasladoz);
@@ -80,13 +83,22 @@ void displayMobiliario() {
 	glRotatef(anguloz, 0.0, 0.0, 1.0);
 
 	glScalef(facEsc, facEsc, facEsc);
+	
+	if (mostrarControles) {
+		controlesMensaje();
+	}
 
 	if (mostrarEjes) {
 		ejes3D();
 	}
-	
-	generarMobiSalon(-31.5, 0.0, 0.0, 4, 7, 2.0);
+
+	generarMobiSalon(-31.5, 0.0, 0.0, 5, 6, 4.0);
 	proyector(-4.5, 15.0, 10.0);
+
+	glPushMatrix();
+	glRotatef(90, 0,1,0);
+	unidadMobiliario(10,0, 8);
+	glPopMatrix();
 		
 	glPopMatrix();
 
@@ -136,6 +148,10 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 			case 'Z':
 				anguloz -= 5.0f;
 				break;
+			case 'h':
+			case 'H':
+				mostrarControles = !mostrarControles;
+				break;
 	}
 	glutPostRedisplay();
 }
@@ -173,12 +189,12 @@ void ratonMobiliario(int btn, int state, int x, int y) {
 
 	if (btn == GLUT_LEFT_BUTTON) {
 		if (state == GLUT_DOWN) {
-			mousePressed = true;
+			mousePresionado = true;
 			posX = static_cast<float>(x);
 			posY = static_cast<float>(y);
 		}
 		else if (state == GLUT_UP) {
-			mousePressed = false;
+			mousePresionado = false;
 		}
 	}
 
@@ -194,7 +210,7 @@ void ratonMobiliario(int btn, int state, int x, int y) {
 }
 
 void arrastreRaton(int x, int y) {
-	if (!mousePressed) return; // Solo realiza el arrastre si el mouse está presionado
+	if (!mousePresionado) return; // Solo realiza el arrastre si el mouse está presionado
 
 	x = (x - 300) / 3;
 	y = (300 - y) / 3;
@@ -499,4 +515,50 @@ void generarMobiSalon(float x, float y, float z, int filas, int mesas, float esp
 		x -= (9.0 * mesas);
 		z += (5.4 + espaciado);
 	}
+}
+
+void writeBitmapString(void* font, const char* string) {
+	const char* c;
+	for (c = string; *c != '\0'; c++) {
+		glutBitmapCharacter(font, *c);
+	}
+}
+
+void controlesMensaje() {
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glRasterPos2f(-95, 85);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Controles:");
+	glRasterPos2f(-95, 80);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Esc -> Salir");
+	glRasterPos2f(-95, 75);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Espacio -> Ejes");
+	glRasterPos2f(-95, 70);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "r -> Regresar");
+	glRasterPos2f(-95, 65);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "+ / - -> ZoomIn/ZoomOut");
+	glRasterPos2f(-95, 60);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "x / X -> Gira eje x");
+	glRasterPos2f(-95, 55);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "y / Y -> Gira eje y");
+	glRasterPos2f(-95, 50);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "z / Z -> Gira eje z");
+	glRasterPos2f(-95, 45);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyUp -> Gira eje x+");
+	glRasterPos2f(-95, 40);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyDown -> Gira eje x-");
+	glRasterPos2f(-95, 35);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyRigth -> Gira eje y+");
+	glRasterPos2f(-95, 30);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyLeft -> Gira eje y-");
+	glRasterPos2f(-95, 25);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "PgUp -> Gira eje z+");
+	glRasterPos2f(-95, 20);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "PgDown -> Gira eje z-");
+	glRasterPos2f(-95, 15);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "click+drag -> trasladar");
+	glRasterPos2f(-95, 10);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Scroll -> ZoomIn/ZoomOut");
+	glRasterPos2f(-95, 5);
+	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "h -> controles");
+	glutPostRedisplay();
 }
