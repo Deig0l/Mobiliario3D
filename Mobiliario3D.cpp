@@ -1,13 +1,16 @@
-#include <windows.h>
-#include <cmath>
-//#include <GL/glut.h>
-#include <GL/freeglut.h>
+#include <vector>
 #include <iostream>
+#include <cmath>
+//#include <GL/freeglut.h>
+#include <GL/glut.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
 
 enum Colores {
 	BLACK, WHITE, RED, GREEN, BLUE, LBLUE, YELLOW, MAGENTA, CYAN, GREY, LGREY, DGREY
 };
 
+std::vector<GLuint> texturaIDs;
 int wheelDelta = 0;
 float angulox = 0.0f;
 float anguloy = 0.0f;
@@ -389,6 +392,133 @@ void prismaMulticolor(float l, float h, float d, float x, float y, float z,
 	glVertex3f(x + l, y + h, z);
 	glVertex3f(x + l, y + h, z - d);
 	glVertex3f(x + l, y, z - d);
+	glEnd();
+}
+
+// Función para dibujar un prisma con la textura indicada
+void prismaTextura(float l, float h, float d, float x, float y, float z, int texturaIndex) {
+	if (texturaIndex < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaIndex]);
+	}
+
+	//Cara frontal
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z);
+	glEnd();
+
+	// Cara posterior
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z - d);
+	glEnd();
+
+	// Cara inferior
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y, z - d);
+	glEnd();
+
+	// Cara superior
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glEnd();
+
+	// Cara lateral izquierda
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x, y, z - d);
+	glEnd();
+
+	// Cara lateral derecha
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x + l, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z - d);
+	glEnd();
+}
+
+void prismaMultitexturas(float l, float h, float d, float x, float y, float z,
+	int texturaFrontal, int texturaTrasera,
+	int texturaSuperior, int texturaInferior,
+	int texturaIzquierda, int texturaDerecha) {
+
+	// Cara frontal
+	if (texturaFrontal < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaFrontal]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z);
+	glEnd();
+
+	// Cara trasera
+	if (texturaTrasera < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaTrasera]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z - d);
+	glEnd();
+
+	// Cara inferior
+	if (texturaInferior < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaInferior]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y, z - d);
+	glEnd();
+
+	// Cara superior
+	if (texturaSuperior < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaSuperior]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glEnd();
+
+	// Cara lateral izquierda
+	if (texturaIzquierda < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaIzquierda]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x, y, z - d);
+	glEnd();
+
+	// Cara lateral derecha
+	if (texturaDerecha < texturaIDs.size()) {
+		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaDerecha]);
+	}
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(x + l, y, z);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(x + l, y + h, z);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(x + l, y + h, z - d);
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(x + l, y, z - d);
 	glEnd();
 }
 
