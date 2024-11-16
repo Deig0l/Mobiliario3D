@@ -78,6 +78,19 @@ void inicializacion(void) {
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+
+	// Cargar todas las texturas necesarias
+	const char* archivosTexturas[] = {
+		"imagenes/madera.jpg",
+		"imagenes/metal.jpg",
+		"imagenes/piedra.jpg",
+		"imagenes/mandelbrot.bmp"
+	};
+
+	for (const char* archivo : archivosTexturas) {
+		cargarTextura(archivo);
+	}
 }
 
 // Función para cargar una textura desde un archivo y añadirla al vector
