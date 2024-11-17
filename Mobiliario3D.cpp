@@ -81,13 +81,12 @@ void inicializacion(void) {
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
-		"imagenes/madera.jpg",
-		"imagenes/metal.jpg",
-		"imagenes/piedra.jpg",
 		"imagenes/mandelbrot.bmp",
 		"imagenes/monitor.jpg",
 		"imagenes/monitor_gris.jpg",
-		"imagenes/screen.png"
+		"imagenes/screen.png",
+		"imagenes/cpu_front.jpg",
+		"imagenes/cpu_back.jpg"
 	};
 
 	for (const char* archivo : archivosTexturas) {
@@ -651,19 +650,21 @@ void monitor(float x, float y, float z) {
 
 void pc(float x, float y, float z) {
 	//Prisma principal
-	prisma(2.0, 3.5, 3.8, 0.0 + x, 0.0 + y, -0.2 + z, DGREY);
-	//Prisma gris frontal
-	prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
-	//Ranura superior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
-	//Ranura media
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
-	//Ranura inferior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
-	//Ranura posterior
-	prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
-	//Boton
-	prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
+	glEnable(GL_TEXTURE_2D);
+	prismaMultitexturas(2.0, 3.5, 4.0, 0.0 + x, 0.0 + y, -0.2 + z, 7, 8, 4, 4, 4, 4);
+	glDisable(GL_TEXTURE_2D);
+	////Prisma gris frontal
+	//prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
+	////Ranura superior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
+	////Ranura media
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
+	////Ranura inferior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
+	////Ranura posterior
+	//prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
+	////Boton
+	//prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
 }
 
 void mouse(float x, float y, float z) {

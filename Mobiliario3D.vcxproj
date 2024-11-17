@@ -135,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="imagenes\asiento.jpg" />
+    <Image Include="imagenes\cpu_back.jpg" />
+    <Image Include="imagenes\cpu_front.jpg" />
     <Image Include="imagenes\metal_negro.jpg" />
     <Image Include="imagenes\monitor.jpg" />
     <Image Include="imagenes\monitor_gris.jpg" />
