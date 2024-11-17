@@ -81,13 +81,15 @@ void inicializacion(void) {
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
-		"imagenes/madera.jpg",
-		"imagenes/metal.jpg",
-		"imagenes/piedra.jpg",
 		"imagenes/mandelbrot.bmp",
 		"imagenes/monitor.jpg",
 		"imagenes/monitor_gris.jpg",
-		"imagenes/screen.png"
+		"imagenes/screen.png",
+		"imagenes/cpu_front.jpg",
+		"imagenes/cpu_back.jpg",
+		"imagenes/bplastic",
+		"imagenes/dgreyplastic",
+		"imagenes/keyboard"
 	};
 
 	for (const char* archivo : archivosTexturas) {
@@ -674,7 +676,10 @@ void mouse(float x, float y, float z) {
 }
 
 void keyboard(float x, float y, float z) {
-	prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
+	glEnable(GL_TEXTURE_2D);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 1,1,1,1,1,1);
+	glDisable(GL_TEXTURE_2D);
+	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
 
 void mesa(float x, float y, float z) {
