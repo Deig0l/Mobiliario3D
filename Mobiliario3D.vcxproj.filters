@@ -31,4 +31,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="imagenes\asiento.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imagenes\metal_negro.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
