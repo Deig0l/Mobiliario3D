@@ -134,7 +134,7 @@ void cargarTextura(const char* filename) {
 
 void displayMobiliario() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glLoadIdentity(); // Restablece la matriz de modelo-vista
 	glPushMatrix();
 
 	glTranslatef(trasladox, trasladoy, trasladoz);
@@ -457,7 +457,7 @@ void prismaTextura(float l, float h, float d, float x, float y, float z, int tex
 	if (texturaIndex < texturaIDs.size()) {
 		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaIndex]);
 	}
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	//Cara frontal
 	glBegin(GL_QUADS);
@@ -669,15 +669,20 @@ void pc(float x, float y, float z) {
 }
 
 void mouse(float x, float y, float z) {
+	glEnable(GL_TEXTURE_2D);
 	//cuerpo principal
-	prismaMulticolor(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, GREY, BLACK, BLACK, BLUE, DGREY, DGREY);
+	//prismaMulticolor(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, GREY, BLACK, BLACK, BLUE, DGREY, DGREY);
+	prismaTextura(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 6);
 	//ruedita
-	prisma(0.2, 0.7, 0.5, 0.035 + x, 0.0025 + y, -0.10 + z, BLACK);
+	prismaTextura(0.2, 0.7, 0.5, 0.0035 + x, 0.00225 + y, -0.10 + z, 7);
+
+	//prisma(0.2, 0.7, 0.5, 0.035 + x, 0.0025 + y, -0.10 + z, BLACK);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void keyboard(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 7, 7, 7, 7);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 6, 6, 8, 7, 6, 6);
 	glDisable(GL_TEXTURE_2D);
 	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
@@ -685,12 +690,12 @@ void keyboard(float x, float y, float z) {
 void mesa(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
 
-	prismaTextura(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, 4); //tablero de la mesa
+	prismaTextura(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, 10); //tablero de la mesa
 	prismaTextura(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, 10); //pata acostada izquierda
 	prismaTextura(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, 10); //pata acostada derecha
 	prismaTextura(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, 10); //pata izquierda
 	prismaTextura(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, 10); //pata derecha
-	prismaTextura(7.95, 2.2, 0.1, x + 0.65, y + 2.3, z - 4.05, 8);//rectangulo
+	prismaTextura(7.95, 2.2, 0.1, x + 0.65, y + 2.3, z - 4.05, 7);//rectangulo
 
 	//prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, LGREY);  // Tablero de la mesa
 
@@ -733,6 +738,7 @@ void proyector(float x, float y, float z) {
 }
 
 void unidadMobiliario(float x, float y, float z) {
+	glColor3f(1.0f, 1.0f, 1.0f);
 	mesa(0.0 + x, 0.0 + y, -0.9 + z);
 	silla(3.0 + x, 0.0 + y, 0.0 + z);
 	pc(0.3 + x, 4.75 + y, -1.0 + z);
