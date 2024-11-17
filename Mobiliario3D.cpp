@@ -78,6 +78,7 @@ void inicializacion(void) {
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
@@ -87,9 +88,9 @@ void inicializacion(void) {
 		"imagenes/screen.png",
 		"imagenes/cpu_front.jpg",
 		"imagenes/cpu_back.jpg",
-		"imagenes/bplastic",
-		"imagenes/dgreyplastic",
-		"imagenes/keyboard",
+		"imagenes/bplastic.jpg",
+		"imagenes/dgreyplastic.jpg",
+		"imagenes/keyboard.jpg",
 		"imagenes/asiento.jpg",
 		"imagenes/metal_negro.jpg"
 	};
@@ -676,7 +677,7 @@ void mouse(float x, float y, float z) {
 
 void keyboard(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 8, 8, 7, 7);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 7, 7, 7, 7);
 	glDisable(GL_TEXTURE_2D);
 	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
@@ -710,20 +711,20 @@ void silla(float x, float y, float z) {
 	// Asiento 
 	//prisma(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, 7);
+	prismaTextura(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, 9);
 
 	// Patas 
 	//     prisma(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, GREY); //pata frontal derecha
-	prismaTextura(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, 8);
+	prismaTextura(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, 10);
 	//     prisma(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, GREY); //pata frontal izquierda
-	prismaTextura(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, 8);
+	prismaTextura(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, 10);
 	//     prisma(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, GREY); //pata trasera derecha
-	prismaTextura(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, 8);
+	prismaTextura(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, 10);
 	//     prisma(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, GREY); //pata trasera izquierda
-	prismaTextura(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, 8);
+	prismaTextura(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, 10);
 	// Respaldo 
 	//     prisma(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, DGREY);
-	prismaTextura(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, 7);
+	prismaTextura(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, 9);
 	glDisable(GL_TEXTURE_2D);
 }
 
