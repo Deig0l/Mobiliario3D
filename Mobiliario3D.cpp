@@ -613,37 +613,37 @@ void monitor(float x, float y, float z) {
 	//Base
 	//prismaMulticolor(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, DGREY, DGREY, GREY, GREY, DGREY,DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, 4);
+	prismaTextura(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Pantalla
 	//prismaMulticolor(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, BLACK, GREY, GREY, GREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, 6, 4, 4, 4, 4, 4);
+	prismaMultitexturas(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, 3, 1, 1, 1, 1, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco horizontal inferior
 	//prismaMulticolor(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, GREY, GREY, GREY, DGREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, 4);
+	prismaTextura(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco horizontal superior
 	//prismaMulticolor(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, GREY, GREY, DGREY, GREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, 4);
+	prismaTextura(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco vertical izquierdo
 	//prismaMulticolor(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, GREY, GREY, GREY, GREY, GREY, DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, 4);
+	prismaTextura(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco vertical derecho
 	//prismaMulticolor(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, GREY, GREY, GREY, GREY, DGREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, 4);
+	prismaTextura(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Cuello
 	//prisma(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, 5);
+	prismaTextura(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, 2);
 	glDisable(GL_TEXTURE_2D);
 	
 }
@@ -651,7 +651,7 @@ void monitor(float x, float y, float z) {
 void pc(float x, float y, float z) {
 	//Prisma principal
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(2.0, 3.5, 4.0, 0.0 + x, 0.0 + y, -0.2 + z, 7, 8, 4, 4, 4, 4);
+	prismaMultitexturas(2.0, 3.5, 4.0, 0.0 + x, 0.0 + y, -0.2 + z, 4, 5, 1, 1, 1, 1);
 	glDisable(GL_TEXTURE_2D);
 	////Prisma gris frontal
 	//prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
