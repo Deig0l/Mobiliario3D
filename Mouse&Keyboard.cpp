@@ -45,7 +45,6 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
-
 void inicializacion(void) {
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
@@ -53,12 +52,11 @@ void inicializacion(void) {
 	glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
-
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glEnable(GL_TEXTURE_2D);
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
+		"imagenes/keyboard.jpg",
 		"imagenes/madera.jpg"
 	};
 
@@ -112,11 +110,7 @@ void displayMK() {
 
 	// Dibuja el "mouse" sin texturas
 	mouse(-2, 0, -2);
-
-	// Dibuja el "keyboard" con texturas
-	glEnable(GL_TEXTURE_2D);
-	keyboard(4, 0, -2);
-	glDisable(GL_TEXTURE_2D);
+	keyboard(5, 5, 5);
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -304,7 +298,6 @@ void prismaTextura(float l, float h, float d, float x, float y, float z, int tex
 	if (texturaIndex < texturaIDs.size()) {
 		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaIndex]);
 	}
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	//Cara frontal
 	glBegin(GL_QUADS);
@@ -359,7 +352,6 @@ void prismaMultitexturas(float l, float h, float d, float x, float y, float z,
 	int texturaFrontal, int texturaTrasera,
 	int texturaSuperior, int texturaInferior,
 	int texturaIzquierda, int texturaDerecha) {
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	// Cara frontal
 	if (texturaFrontal < texturaIDs.size()) {
@@ -462,5 +454,7 @@ void mouse(float x, float y, float z) {
 //}
 
 void keyboard(float x, float y, float z) {
-	prismaTextura(5,0.25,2,2,0,-2.0,0);
+	glEnable(GL_TEXTURE_2D);
+	prismaTextura(5,0.25,2,2,0,-2.0,1);
+	glDisable(GL_TEXTURE_2D);
 }
