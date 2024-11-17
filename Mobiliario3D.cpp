@@ -84,7 +84,8 @@ void inicializacion(void) {
 		"imagenes/madera.jpg",
 		"imagenes/metal.jpg",
 		"imagenes/piedra.jpg",
-		"imagenes/mandelbrot.bmp"
+		"imagenes/mandelbrot.bmp",
+		"imagenes/screen.png"
 	};
 
 	for (const char* archivo : archivosTexturas) {
@@ -154,7 +155,7 @@ void displayMobiliario() {
 	
 	glEnable(GL_TEXTURE_2D);
 
-	prismaTextura(10, 5, 5, -5, -5, -5, 1);
+	prismaTextura(10, 5, 5, -5, -5, -5, 3);
 	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
@@ -611,7 +612,10 @@ void monitor(float x, float y, float z) {
 	//Base
 	prismaMulticolor(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, DGREY, DGREY, GREY, GREY, DGREY,DGREY);
 	//Pantalla
-	prismaMulticolor(4.0, 3.0, 0.2, 0 + x, 1.0 + y, -0.5 + z, BLACK, GREY, GREY, GREY, GREY, GREY);
+	//prismaMulticolor(4.0, 3.0, 0.2, 0 + x, 1.0 + y, -0.5 + z, BLACK, GREY, GREY, GREY, GREY, GREY);
+	glEnable(GL_TEXTURE_2D);
+	prismaTextura(4.0, 3.0, 0.2, 0 + x, 1.0 + y, -0.5 + z, 4);
+	glDisable(GL_TEXTURE_2D);
 	//Marco horizontal inferior
 	prismaMulticolor(4.0, 0.2, 0.2, 0 + x, 1.0 + y, -0.3 + z, GREY, GREY, GREY, DGREY, GREY, GREY);
 	//Marco horizontal superior
