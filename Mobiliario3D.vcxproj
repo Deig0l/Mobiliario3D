@@ -132,6 +132,7 @@
     <ClCompile Include="PC&amp;Monitor&amp;Proyector.cpp" />
     <ClCompile Include="Mouse&amp;Keyboard.cpp" />
     <ClCompile Include="Silla.cpp" />
+    <ClCompile Include="Vestigios.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="imagenes\asiento.jpg" />

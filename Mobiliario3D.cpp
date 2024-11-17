@@ -33,9 +33,9 @@ void ratonMobiliario(int button, int state, int x, int y);
 void arrastreRaton(int x, int y);
 void ejes3D();
 void asignarColor(Colores color);
-void prisma(float l, float h, float d, float x, float y, float z, Colores color);
-void prismaMulticolor(float l, float h, float d, float x, float y, float z,
-	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
+//void prisma(float l, float h, float d, float x, float y, float z, Colores color);
+//void prismaMulticolor(float l, float h, float d, float x, float y, float z,
+	//Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld);
 void prismaTextura(float l, float h, float d, float x, float y, float z, int texturaIndex);
 void prismaMultitexturas(float l, float h, float d, float x, float y, float z,
 	int texturaFrontal, int texturaTrasera,
@@ -52,8 +52,8 @@ void silla(float x, float y, float z);
 void proyector(float x, float y, float z);
 void unidadMobiliario(float x, float y, float z);
 void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado);
-void writeBitmapString(void* font, const char* string);
-void controlesMensaje();
+//void writeBitmapString(void* font, const char* string);
+//void controlesMensaje();
 
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
@@ -138,6 +138,9 @@ void displayMobiliario() {
 	glLoadIdentity(); // Restablece la matriz de modelo-vista
 	glPushMatrix();
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glTranslatef(trasladox, trasladoy, trasladoz);
 
 	glRotatef(angulox, 1.0, 0.0, 0.0);
@@ -146,7 +149,7 @@ void displayMobiliario() {
 	glScalef(facEsc, facEsc, facEsc);
 	
 	if (mostrarControles) {
-		controlesMensaje();
+		//controlesMensaje();
 	}
 
 	if (mostrarEjes) {
@@ -351,107 +354,6 @@ void asignarColor(Colores color) {
 		break;
 	}
 };
-
-//Una unidad son 10cm para los primas
-void prisma(float l, float h, float d, float x, float y, float z, Colores color) {
-	asignarColor(color);
-	//Cara frontal
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x + l, y + h, z);
-	glVertex3f(x + l, y, z);
-	glEnd();
-	//Cara posterior
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z - d);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y, z - d);
-	glEnd();
-
-
-	//Cara inferior
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y, z - d);
-	glVertex3f(x + l, y, z - d);
-	glVertex3f(x + l, y, z);
-	glEnd();
-	//Cara superior
-	glBegin(GL_QUADS);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y + h, z);
-	glEnd();
-	//Cara lateral izquierda
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x, y, z - d);
-	glEnd();
-	//Cara lateral derecha
-	glBegin(GL_QUADS);
-	glVertex3f(x + l, y, z);
-	glVertex3f(x + l, y + h, z);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y, z - d);
-	glEnd();
-}
-
-void prismaMulticolor(float l, float h, float d, float x, float y, float z,
-	Colores cf, Colores cp, Colores ci, Colores cs, Colores cli, Colores cld) {
-	//Cara frontal
-	asignarColor(cf);
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x + l, y + h, z);
-	glVertex3f(x + l, y, z);
-	glEnd();
-	//Cara posterior
-	asignarColor(cp);
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z - d);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y, z - d);
-	glEnd();
-	//Cara inferior
-	asignarColor(ci);
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y, z - d);
-	glVertex3f(x + l, y, z - d);
-	glVertex3f(x + l, y, z);
-	glEnd();
-	//Cara superior
-	asignarColor(cs);
-	glBegin(GL_QUADS);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y + h, z);
-	glEnd();
-	//Cara lateral izquierda
-	asignarColor(cli);
-	glBegin(GL_QUADS);
-	glVertex3f(x, y, z);
-	glVertex3f(x, y + h, z);
-	glVertex3f(x, y + h, z - d);
-	glVertex3f(x, y, z - d);
-	glEnd();
-	//Cara lateral derecha
-	asignarColor(cld);
-	glBegin(GL_QUADS);
-	glVertex3f(x + l, y, z);
-	glVertex3f(x + l, y + h, z);
-	glVertex3f(x + l, y + h, z - d);
-	glVertex3f(x + l, y, z - d);
-	glEnd();
-}
 
 // Función para dibujar un prisma con la textura indicada
 void prismaTextura(float l, float h, float d, float x, float y, float z, int texturaIndex) {
@@ -674,7 +576,6 @@ void mouse(float x, float y, float z) {
 	//cuerpo principal
 	//prismaMulticolor(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, GREY, BLACK, BLACK, BLUE, DGREY, DGREY);
 	prismaMultitexturas(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 6, 6, 11, 7, 7, 7); 
-	//prismaTextura(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 11);
 	//ruedita
 	prismaTextura(0.2, 0.7, 0.5, 0.0035 + x, 0.00225 + y, -0.10 + z, 7);
 
@@ -736,8 +637,12 @@ void silla(float x, float y, float z) {
 }
 
 void proyector(float x, float y, float z) {
-	prisma(0.5, 4.0, 0.5, 1.25 + x, 0.9 + y, -1.0 + z, BLACK);
-	prismaMulticolor(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, GREY, GREY, LGREY, LGREY, GREY, GREY);
+	glEnable(GL_TEXTURE_2D);
+	//prisma(0.5, 4.0, 0.5, 1.25 + x, 0.9 + y, -1.0 + z, BLACK);
+	prismaTextura(0.5, 4.0, 0.5, 1.25 + x, 0.9 + y, - 1.0 + z, 2); 
+	//prismaMulticolor(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, GREY, GREY, LGREY, LGREY, GREY, GREY);
+	prismaMultitexturas(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, 7, 7, 2, 2, 7, 7);
+	glDisable(GL_TEXTURE_2D);
 	cilindro(2.2 + x, 0.45 + y, -2.7 + z, 0.4, 0.2, BLACK, LBLUE);
 }
 
@@ -760,50 +665,4 @@ void generarMobiSalon(float x, float y, float z, int filas, int mesas, float esp
 		x -= (9.0 * mesas);
 		z += (5.4 + espaciado);
 	}
-}
-
-void writeBitmapString(void* font, const char* string) {
-	const char* c;
-	for (c = string; *c != '\0'; c++) {
-		glutBitmapCharacter(font, *c);
-	}
-}
-
-void controlesMensaje() {
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glRasterPos2f(-95, 85);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Controles:");
-	glRasterPos2f(-95, 80);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Esc -> Salir");
-	glRasterPos2f(-95, 75);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Espacio -> Ejes");
-	glRasterPos2f(-95, 70);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "r -> Regresar");
-	glRasterPos2f(-95, 65);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "+ / - -> ZoomIn/ZoomOut");
-	glRasterPos2f(-95, 60);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "x / X -> Gira eje x");
-	glRasterPos2f(-95, 55);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "y / Y -> Gira eje y");
-	glRasterPos2f(-95, 50);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "z / Z -> Gira eje z");
-	glRasterPos2f(-95, 45);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyUp -> Gira eje x+");
-	glRasterPos2f(-95, 40);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyDown -> Gira eje x-");
-	glRasterPos2f(-95, 35);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyRigth -> Gira eje y+");
-	glRasterPos2f(-95, 30);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "KeyLeft -> Gira eje y-");
-	glRasterPos2f(-95, 25);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "PgUp -> Gira eje z+");
-	glRasterPos2f(-95, 20);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "PgDown -> Gira eje z-");
-	glRasterPos2f(-95, 15);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "click+drag -> trasladar");
-	glRasterPos2f(-95, 10);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "Scroll -> ZoomIn/ZoomOut");
-	glRasterPos2f(-95, 5);
-	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "h -> controles");
-	glutPostRedisplay();
 }
