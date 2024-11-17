@@ -683,14 +683,25 @@ void keyboard(float x, float y, float z) {
 }
 
 void mesa(float x, float y, float z) {
-	prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, LGREY);  // Tablero de la mesa
+	glEnable(GL_TEXTURE_2D);
 
-	prisma(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, BLACK); // Pata acostada izquierda 
-	prisma(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, BLACK); // Pata acostada derecha 
-	prisma(0.35, 3.7, 0.8, x + 0.3, y + 0.8, z - 3.35, DGREY); // Pata izquierda 
-	prisma(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, DGREY); // Pata derecha 
+	prismaTextura(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, 4); //tablero de la mesa
+	prismaTextura(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, 10); //pata acostada izquierda
+	prismaTextura(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, 10); //pata acostada derecha
+	prismaTextura(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, 10); //pata izquierda
+	prismaTextura(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, 10); //pata derecha
+	prismaTextura(7.95, 2.2, 0.1, x + 0.65, y + 2.3, z - 4.05, 8);//rectangulo
 
-	prisma(7.95, 2.2, 0.1, x + 0.65, y +2.3, z - 4.05, BLACK); // Rectangulo negro
+	//prisma(9.0, 0.25, 4.5, x + 0.0, y + 4.5, z + 0.35, LGREY);  // Tablero de la mesa
+
+	//prisma(0.35, 0.8, 4.5, x + 0.3, y + 0.0, z + 0.0, BLACK); // Pata acostada izquierda 
+	//prisma(0.35, 0.8, 4.5, x + 8.4, y + 0.0, z + 0.0, BLACK); // Pata acostada derecha 
+	//prisma(0.35, 3.7, 0.8, x + 0.3, y + 0.8, z - 3.35, DGREY); // Pata izquierda 
+	//prisma(0.35, 3.7, 0.8, x + 8.4, y + 0.8, z - 3.35, DGREY); // Pata derecha 
+
+	//prisma(7.95, 2.2, 0.1, x + 0.65, y +2.3, z - 4.05, BLACK); // Rectangulo negro
+
+	glDisable(GL_TEXTURE_2D);
 
 }
 
