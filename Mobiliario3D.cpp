@@ -78,7 +78,6 @@ void inicializacion(void) {
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
@@ -135,7 +134,6 @@ void displayMobiliario() {
 	glRotatef(angulox, 1.0, 0.0, 0.0);
 	glRotatef(anguloy, 0.0, 1.0, 0.0);
 	glRotatef(anguloz, 0.0, 0.0, 1.0);
-
 	glScalef(facEsc, facEsc, facEsc);
 	
 	if (mostrarControles) {
@@ -153,7 +151,12 @@ void displayMobiliario() {
 	glRotatef(90, 0,1,0);
 	unidadMobiliario(10,0, 8);
 	glPopMatrix();
-		
+	
+	glEnable(GL_TEXTURE_2D);
+
+	prismaTextura(10, 5, 5, -5, -5, -5, 1);
+	glDisable(GL_TEXTURE_2D);
+
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -451,6 +454,7 @@ void prismaTextura(float l, float h, float d, float x, float y, float z, int tex
 	if (texturaIndex < texturaIDs.size()) {
 		glBindTexture(GL_TEXTURE_2D, texturaIDs[texturaIndex]);
 	}
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 	//Cara frontal
 	glBegin(GL_QUADS);
