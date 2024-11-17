@@ -82,17 +82,18 @@ void inicializacion(void) {
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
-		"imagenes/mandelbrot.bmp",
-		"imagenes/monitor.jpg",
-		"imagenes/monitor_gris.jpg",
-		"imagenes/screen.png",
-		"imagenes/cpu_front.jpg",
-		"imagenes/cpu_back.jpg",
-		"imagenes/bplastic.jpg",
-		"imagenes/dgreyplastic.jpg",
-		"imagenes/keyboard.jpg",
-		"imagenes/asiento.jpg",
-		"imagenes/metal_negro.jpg"
+		"imagenes/mandelbrot.bmp",	//0
+		"imagenes/monitor.jpg",		//1
+		"imagenes/monitor_gris.jpg",//2
+		"imagenes/screen.png",		//3
+		"imagenes/cpu_front.jpg",	//4
+		"imagenes/cpu_back.jpg",	//5
+		"imagenes/bplastic.jpg",	//6
+		"imagenes/dgreyplastic.jpg",//7
+		"imagenes/keyboard.jpg",	//8
+		"imagenes/asiento.jpg",		//9
+		"imagenes/metal_negro.jpg",	//10
+		"imagenes/mouse.png"		//11
 	};
 
 	for (const char* archivo : archivosTexturas) {
@@ -672,7 +673,8 @@ void mouse(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
 	//cuerpo principal
 	//prismaMulticolor(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, GREY, BLACK, BLACK, BLUE, DGREY, DGREY);
-	prismaTextura(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 6);
+	prismaMultitexturas(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 6, 6, 11, 7, 7, 7); 
+	//prismaTextura(1, 0.7, 2.3, 0 + x, 0 + y, 0 + z, 11);
 	//ruedita
 	prismaTextura(0.2, 0.7, 0.5, 0.0035 + x, 0.00225 + y, -0.10 + z, 7);
 
