@@ -86,10 +86,12 @@ void inicializacion(void) {
 		"imagenes/monitor_gris.jpg",
 		"imagenes/screen.png",
 		"imagenes/cpu_front.jpg",
-		"imagenes/cpu_back.jpg",
+		"imagenes/cpu_back.jpg"
 		"imagenes/bplastic",
 		"imagenes/dgreyplastic",
-		"imagenes/keyboard"
+		"imagenes/keyboard",
+		"imagenes/asiento.jpg",
+		"imagenes/metal_negro.jpg"
 	};
 
 	for (const char* archivo : archivosTexturas) {
@@ -653,19 +655,21 @@ void monitor(float x, float y, float z) {
 
 void pc(float x, float y, float z) {
 	//Prisma principal
-	prisma(2.0, 3.5, 3.8, 0.0 + x, 0.0 + y, -0.2 + z, DGREY);
-	//Prisma gris frontal
-	prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
-	//Ranura superior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
-	//Ranura media
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
-	//Ranura inferior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
-	//Ranura posterior
-	prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
-	//Boton
-	prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
+	glEnable(GL_TEXTURE_2D);
+	prismaMultitexturas(2.0, 3.5, 4.0, 0.0 + x, 0.0 + y, -0.2 + z, 7, 8, 4, 4, 4, 4);
+	glDisable(GL_TEXTURE_2D);
+	////Prisma gris frontal
+	//prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
+	////Ranura superior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
+	////Ranura media
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
+	////Ranura inferior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
+	////Ranura posterior
+	//prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
+	////Boton
+	//prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
 }
 
 void mouse(float x, float y, float z) {
@@ -677,7 +681,7 @@ void mouse(float x, float y, float z) {
 
 void keyboard(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 1,1,1,1,1,1);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7,7,8,0,7,7);
 	glDisable(GL_TEXTURE_2D);
 	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
