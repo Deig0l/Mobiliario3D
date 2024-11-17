@@ -133,6 +133,10 @@
     <ClCompile Include="Mouse&amp;Keyboard.cpp" />
     <ClCompile Include="Silla.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="imagenes\asiento.jpg" />
+    <Image Include="imagenes\metal_negro.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
