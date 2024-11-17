@@ -81,13 +81,15 @@ void inicializacion(void) {
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
-		"imagenes/madera.jpg",
-		"imagenes/metal.jpg",
-		"imagenes/piedra.jpg",
 		"imagenes/mandelbrot.bmp",
 		"imagenes/monitor.jpg",
 		"imagenes/monitor_gris.jpg",
 		"imagenes/screen.png",
+		"imagenes/cpu_front.jpg",
+		"imagenes/cpu_back.jpg",
+		"imagenes/bplastic",
+		"imagenes/dgreyplastic",
+		"imagenes/keyboard",
 		"imagenes/asiento.jpg",
 		"imagenes/metal_negro.jpg"
 	};
@@ -157,11 +159,6 @@ void displayMobiliario() {
 	unidadMobiliario(10,0, 8);
 	glPopMatrix();
 	
-	glEnable(GL_TEXTURE_2D);
-
-	prismaTextura(10, 5, 5, -5, -5, -5, 3);
-	glDisable(GL_TEXTURE_2D);
-
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -616,56 +613,58 @@ void monitor(float x, float y, float z) {
 	//Base
 	//prismaMulticolor(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, DGREY, DGREY, GREY, GREY, DGREY,DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, 4);
+	prismaTextura(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Pantalla
 	//prismaMulticolor(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, BLACK, GREY, GREY, GREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, 6, 4, 4, 4, 4, 4);
+	prismaMultitexturas(3.6, 2.6, 0.2, 0.2 + x, 1.2 + y, -0.5 + z, 3, 1, 1, 1, 1, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco horizontal inferior
 	//prismaMulticolor(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, GREY, GREY, GREY, DGREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, 4);
+	prismaTextura(4.0, 0.2, 0.4, 0 + x, 1.0 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco horizontal superior
 	//prismaMulticolor(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, GREY, GREY, DGREY, GREY, GREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, 4);
+	prismaTextura(4.0, 0.2, 0.4, 0 + x, 3.8 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco vertical izquierdo
 	//prismaMulticolor(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, GREY, GREY, GREY, GREY, GREY, DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, 4);
+	prismaTextura(0.2, 2.6, 0.4, 0 + x, 1.2 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Marco vertical derecho
 	//prismaMulticolor(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, GREY, GREY, GREY, GREY, DGREY, GREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, 4);
+	prismaTextura(0.2, 2.6, 0.4, 3.8 + x, 1.2 + y, -0.3 + z, 1);
 	glDisable(GL_TEXTURE_2D);
 	//Cuello
 	//prisma(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, DGREY);
 	glEnable(GL_TEXTURE_2D);
-	prismaTextura(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, 5);
+	prismaTextura(0.8, 2.0, 0.3, 1.6 + x, 0.2 + y, -0.7 + z, 2);
 	glDisable(GL_TEXTURE_2D);
 	
 }
 
 void pc(float x, float y, float z) {
 	//Prisma principal
-	prisma(2.0, 3.5, 3.8, 0.0 + x, 0.0 + y, -0.2 + z, DGREY);
-	//Prisma gris frontal
-	prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
-	//Ranura superior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
-	//Ranura media
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
-	//Ranura inferior
-	prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
-	//Ranura posterior
-	prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
-	//Boton
-	prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
+	glEnable(GL_TEXTURE_2D);
+	prismaMultitexturas(2.0, 3.5, 4.0, 0.0 + x, 0.0 + y, -0.2 + z, 4, 5, 1, 1, 1, 1);
+	glDisable(GL_TEXTURE_2D);
+	////Prisma gris frontal
+	//prisma(2.0, 3.5, 0.2, 0.0 + x, 0.0 + y, 0.0 + z, GREY);
+	////Ranura superior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.9 + y, 0.01 + z, LGREY);
+	////Ranura media
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 2.3 + y, 0.01 + z, LGREY);
+	////Ranura inferior
+	//prisma(1.6, 0.4, 0.1, 0.2 + x, 1.7 + y, 0.01 + z, LGREY);
+	////Ranura posterior
+	//prisma(1.6, 2.3, 0.1, 0.2 + x, 1.0 + y, -3.91 + z, BLACK);
+	////Boton
+	//prisma(0.2, 0.3, 0.1, 0.9 + x, 0.8 + y, 0.01 + z, BLUE);
 }
 
 void mouse(float x, float y, float z) {
@@ -676,7 +675,10 @@ void mouse(float x, float y, float z) {
 }
 
 void keyboard(float x, float y, float z) {
-	prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
+	glEnable(GL_TEXTURE_2D);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 8, 8, 7, 7);
+	glDisable(GL_TEXTURE_2D);
+	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
 
 void mesa(float x, float y, float z) {
