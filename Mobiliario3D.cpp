@@ -696,14 +696,23 @@ void mesa(float x, float y, float z) {
 
 void silla(float x, float y, float z) {
 	// Asiento 
-	prisma(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, DGREY);
+	//prisma(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, DGREY);
+	glEnable(GL_TEXTURE_2D);
+	prismaTextura(3.0, 0.45, 2.4, x + 0.0, y + 2.0, z - 0.35, 7);
+
 	// Patas 
-	prisma(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, GREY); //pata frontal derecha
-	prisma(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, GREY); //pata frontal izquierda
-	prisma(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, GREY); //pata trasera derecha
-	prisma(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, GREY); //pata trasera izquierda
+	//     prisma(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, GREY); //pata frontal derecha
+	prismaTextura(0.35, 2.0, 0.35, x + 2.6, y + 0.0, z - 2.3, 8);
+	//     prisma(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, GREY); //pata frontal izquierda
+	prismaTextura(0.35, 2.0, 0.35, x + 0.0, y + 0.0, z - 2.3, 8);
+	//     prisma(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, GREY); //pata trasera derecha
+	prismaTextura(0.35, 2.9, 0.35, x + 2.6, y + 0.0, z + 0.0, 8);
+	//     prisma(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, GREY); //pata trasera izquierda
+	prismaTextura(0.35, 2.9, 0.35, x + 0.0, y + 0.0, z + 0.0, 8);
 	// Respaldo 
-	prisma(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, DGREY);
+	//     prisma(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, DGREY);
+	prismaTextura(3.1, 2.4, 0.45, x - 0.055, y + 2.8, z + 0.05, 7);
+	glDisable(GL_TEXTURE_2D);
 }
 
 void proyector(float x, float y, float z) {
