@@ -135,11 +135,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="imagenes\asiento.jpg" />
+    <Image Include="imagenes\bplastic.jpg" />
+    <Image Include="imagenes\dgreyplastic.jpg" />
+    <Image Include="imagenes\keyboard.jpg" />
+    <Image Include="imagenes\madera.jpg" />
+    <Image Include="imagenes\mandelbrot.bmp" />
+    <Image Include="imagenes\metal.jpg" />
     <Image Include="imagenes\cpu_back.jpg" />
     <Image Include="imagenes\cpu_front.jpg" />
     <Image Include="imagenes\metal_negro.jpg" />
     <Image Include="imagenes\monitor.jpg" />
     <Image Include="imagenes\monitor_gris.jpg" />
+    <Image Include="imagenes\piedra.jpg" />
     <Image Include="imagenes\screen.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
