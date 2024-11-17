@@ -86,7 +86,7 @@ void inicializacion(void) {
 		"imagenes/monitor_gris.jpg",
 		"imagenes/screen.png",
 		"imagenes/cpu_front.jpg",
-		"imagenes/cpu_back.jpg"
+		"imagenes/cpu_back.jpg",
 		"imagenes/bplastic",
 		"imagenes/dgreyplastic",
 		"imagenes/keyboard",
@@ -159,11 +159,6 @@ void displayMobiliario() {
 	unidadMobiliario(10,0, 8);
 	glPopMatrix();
 	
-	glEnable(GL_TEXTURE_2D);
-
-	prismaTextura(10, 5, 5, -5, -5, -5, 3);
-	glDisable(GL_TEXTURE_2D);
-
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -681,7 +676,7 @@ void mouse(float x, float y, float z) {
 
 void keyboard(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7,7,8,0,7,7);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 8, 8, 7, 7);
 	glDisable(GL_TEXTURE_2D);
 	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
