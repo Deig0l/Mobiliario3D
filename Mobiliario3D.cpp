@@ -78,6 +78,7 @@ void inicializacion(void) {
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_DEPTH_TEST);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	// Cargar todas las texturas necesarias
 	const char* archivosTexturas[] = {
@@ -87,9 +88,9 @@ void inicializacion(void) {
 		"imagenes/screen.png",
 		"imagenes/cpu_front.jpg",
 		"imagenes/cpu_back.jpg",
-		"imagenes/bplastic",
-		"imagenes/dgreyplastic",
-		"imagenes/keyboard",
+		"imagenes/bplastic.jpg",
+		"imagenes/dgreyplastic.jpg",
+		"imagenes/keyboard.jpg",
 		"imagenes/asiento.jpg",
 		"imagenes/metal_negro.jpg"
 	};
@@ -676,7 +677,7 @@ void mouse(float x, float y, float z) {
 
 void keyboard(float x, float y, float z) {
 	glEnable(GL_TEXTURE_2D);
-	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 8, 8, 7, 7);
+	prismaMultitexturas(5, 0.25, 2, -1 + x, 0 + y, 0 + z, 7, 7, 7, 7, 7, 7);
 	glDisable(GL_TEXTURE_2D);
 	//prismaMulticolor(5, 0.25, 2, -1 + x, 0 + y, 0 + z, DGREY, DGREY, BLACK, GREY, DGREY, DGREY);
 }
