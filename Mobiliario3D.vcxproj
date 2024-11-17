@@ -136,6 +136,9 @@
   <ItemGroup>
     <Image Include="imagenes\asiento.jpg" />
     <Image Include="imagenes\metal_negro.jpg" />
+    <Image Include="imagenes\monitor.jpg" />
+    <Image Include="imagenes\monitor_gris.jpg" />
+    <Image Include="imagenes\screen.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
