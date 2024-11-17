@@ -116,15 +116,20 @@ void cargarTextura(const char* filename) {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		// Determinar el formato de la imagen y cargarla
-		if (nrChannels == 3)
+		// Cargar la imagen en la textura
+		if (nrChannels == 3) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		else if (nrChannels == 4)
+		}
+		else if (nrChannels == 4) {
+			// Configuración para texturas con canal alfa (transparencia)
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		}
 
+		// Generar mipmaps para mejorar la calidad al escalar
 		//glGenerateMipmap(GL_TEXTURE_2D);
 
-		// Agregar el ID de la textura al vector
 		texturaIDs.push_back(texturaID);
 		stbi_image_free(data);
 	}

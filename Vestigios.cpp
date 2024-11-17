@@ -146,3 +146,36 @@
 //	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "h -> controles");
 //	glutPostRedisplay();
 //}
+
+
+//Cargar textura anterior
+//void cargarTextura(const char* filename) {
+//	int width, height, nrChannels;
+//	unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, 0);
+//	if (data) {
+//		GLuint texturaID;
+//		glGenTextures(1, &texturaID);
+//		glBindTexture(GL_TEXTURE_2D, texturaID);
+//
+//		// Configurar parámetros de textura
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//
+//		// Determinar el formato de la imagen y cargarla
+//		if (nrChannels == 3)
+//			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+//		else if (nrChannels == 4)
+//			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+//
+//		//glGenerateMipmap(GL_TEXTURE_2D);
+//
+//		// Agregar el ID de la textura al vector
+//		texturaIDs.push_back(texturaID);
+//		stbi_image_free(data);
+//	}
+//	else {
+//		std::cerr << "Error al cargar la imagen: " << filename << std::endl;
+//	}
+//}
