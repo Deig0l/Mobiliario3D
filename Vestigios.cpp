@@ -256,3 +256,36 @@ FIGURAS UTILIZANDO SOLO COLORES
 //	prismaMulticolor(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, GREY, GREY, LGREY, LGREY, GREY, GREY);
 //	cilindro(2.2 + x, 0.45 + y, -2.7 + z, 0.4, 0.2, BLACK, LBLUE);
 //}
+
+
+//void inicializacion(void) {
+//	//glClearColor(1.0, 1.0, 1.0, 1.0);
+//	glClearColor(0.75, 0.5, 1.0, 1.0);
+//	glMatrixMode(GL_PROJECTION);
+//	glLoadIdentity();
+//	//glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
+//	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
+//	glMatrixMode(GL_MODELVIEW);
+//	glEnable(GL_DEPTH_TEST);
+//	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+//
+//	// Cargar todas las texturas necesarias
+//	const char* archivosTexturas[] = {
+//		"imagenes/mandelbrot.bmp",	//0
+//		"imagenes/monitor.jpg",		//1
+//		"imagenes/monitor_gris.jpg",//2
+//		"imagenes/screen.png",		//3
+//		"imagenes/cpu_front.jpg",	//4
+//		"imagenes/cpu_back.jpg",	//5
+//		"imagenes/bplastic.jpg",	//6
+//		"imagenes/dgreyplastic.jpg",//7
+//		"imagenes/keyboard.jpg",	//8
+//		"imagenes/asiento.jpg",		//9
+//		"imagenes/metal_negro.jpg",	//10
+//		"imagenes/mouse.png"		//11
+//	};
+//
+//	for (const char* archivo : archivosTexturas) {
+//		cargarTextura(archivo);
+//	}
+//}
