@@ -24,7 +24,11 @@ bool mostrarEjes = true;
 bool mostrarControles = true;
 bool mousePresionado = false;
 
+//Globals for lighting
+static float m = 0.2; // Global ambient white light intensity.
+
 void inicializacion(void);
+void display();
 void displayMobiliario();
 void cargarTextura(const char* filename);
 void tecladoMobiliario(unsigned char key, int x, int y);
@@ -60,7 +64,8 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Mobiliario 3D");
-	glutDisplayFunc(displayMobiliario);
+	//glutDisplayFunc(displayMobiliario);
+	glutDisplayFunc(display);
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
@@ -71,9 +76,24 @@ int main(int argc, char** argv) {
 }
 
 void inicializacion(void) {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	//glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+
+	// Turn on OpenGL lighting.
+	glEnable(GL_LIGHTING);
+
+	// Material property vectors.
+	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental
+	float matSpec[] = { 1.0, 1.0, 1,0, 1.0 };
+	float matShine[] = { 50.0 };
+
+	// Material properties of mobiliario.
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, matAmbAndDif);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
+	glMaterialfv(GL_FRONT, GL_SHININESS, matShine);
+
 	//glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
@@ -137,6 +157,19 @@ void cargarTextura(const char* filename) {
 	else {
 		std::cerr << "Error al cargar la imagen: " << filename << std::endl;
 	}
+}
+
+void display() {
+	// Light property vectors.
+	float globAmb[] = { m, m, m, 1.0 };
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
+
+	// Draw light spheres after disabling lighting.
+	/*glDisable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);*/
+
+	displayMobiliario();
 }
 
 void displayMobiliario() {
@@ -221,6 +254,16 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 			case 'h':
 			case 'H':
 				mostrarControles = !mostrarControles;
+				break;
+			case 'm':
+				if (m > 0.0) m -= 0.05;
+				glutPostRedisplay();
+				break;
+			case 'M':
+				if (m < 1.0) m += 0.05;
+				glutPostRedisplay();
+				break;
+			default:
 				break;
 	}
 	glutPostRedisplay();
