@@ -26,6 +26,8 @@ bool mousePresionado = false;
 
 //Globals for lighting
 static float m = 0.2; // Global ambient white light intensity.
+static int light0On = 1; // White light on?
+static float d = 1.0; // Diffuse and specular white light intensity.
 
 void inicializacion(void);
 void display();
@@ -65,12 +67,12 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Mobiliario 3D");
 	//glutDisplayFunc(displayMobiliario);
+	inicializacion();
 	glutDisplayFunc(display);
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
 	glutMotionFunc(arrastreRaton);
-	inicializacion();
 	glutMainLoop();
 	return 0;
 }
@@ -160,19 +162,64 @@ void cargarTextura(const char* filename) {
 }
 
 void display() {
-	// Light property vectors.
-	float globAmb[] = { m, m, m, 1.0 };
+	//// Light property vectors.
+	//float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
+	//float lightDifAndSpec0[] = { d, d, d, 1.0 };
+	////float lightPos0[] = { 0.0, 0.0, 3.0, 1.0 };
+	//float lightPos0[] = { -15.0, 20.0, -10.0, 1.0 };
+	//float globAmb[] = { m, m, m, 1.0 };
 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
+	//// Light0 properties (foco blanco)
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDifAndSpec0);
+	//glLightfv(GL_LIGHT0, GL_SPECULAR, lightDifAndSpec0);
 
-	// Draw light spheres after disabling lighting.
-	/*glDisable(GL_LIGHTING);
-	glEnable(GL_LIGHTING);*/
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
+
+	//// Turn lights off/on.
+	//if (light0On) glEnable(GL_LIGHT0); else glDisable(GL_LIGHT0);
+
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glLoadIdentity(); // Restablece la matriz de modelo-vista
+
+	//// Draw light spheres after disabling lighting.
+	//glDisable(GL_LIGHTING);
+
+	//// Light0 and its sphere positioned (foco blanco).
+	//glPushMatrix();
+	//glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+	//glTranslatef(lightPos0[0], lightPos0[1], lightPos0[2]);
+	////glColor3f(d, d, d);
+	//glColor3f(1.0, 0.0, 0.0);
+	////if (light0On) glutWireSphere(0.05, 8, 8);
+	//if (light0On) glutWireSphere(1.0, 8, 8);
+	//glPopMatrix();
+	//glEnable(GL_LIGHTING);
 
 	displayMobiliario();
 }
 
 void displayMobiliario() {
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glLoadIdentity(); // Restablece la matriz de modelo-vista
+
+	// Light property vectors.
+	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
+	float lightDifAndSpec0[] = { d, d, d, 1.0 };
+	//float lightPos0[] = { 0.0, 0.0, 3.0, 1.0 };
+	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 };
+	float globAmb[] = { m, m, m, 1.0 };
+
+	// Light0 properties (foco blanco)
+	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDifAndSpec0);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, lightDifAndSpec0);
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
+
+	// Turn lights off/on.
+	if (light0On) glEnable(GL_LIGHT0); else glDisable(GL_LIGHT0);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity(); // Restablece la matriz de modelo-vista
 
@@ -192,10 +239,24 @@ void displayMobiliario() {
 	}
 
 	if (mostrarEjes) {
-		ejes3D();
+		//ejes3D();
 	}
 
-	generarMobiSalon(-31.5, 0.0, 0.0, 5, 6, 4.0);
+	// Draw light spheres after disabling lighting.
+	glDisable(GL_LIGHTING);
+
+	// Light0 and its sphere positioned (foco blanco).
+	glPushMatrix();
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+	glTranslatef(lightPos0[0], lightPos0[1], lightPos0[2]);
+	//glColor3f(d, d, d);
+	glColor3f(d, d, d);
+	//if (light0On) glutWireSphere(0.05, 8, 8);
+	if (light0On) glutWireSphere(1.0, 8, 8);
+	glPopMatrix();
+	glEnable(GL_LIGHTING);
+
+	generarMobiSalon(-31.5, 0.0, 0.0, 4, 4, 4.0);
 	proyector(-4.5, 15.0, 10.0);
 
 	glPushMatrix();
@@ -261,6 +322,22 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 				break;
 			case 'M':
 				if (m < 1.0) m += 0.05;
+				glutPostRedisplay();
+				break;
+			case 'w':
+				if (light0On) light0On = 0; else light0On = 1;
+				glutPostRedisplay();
+				break;
+			case 'W':
+				if (light0On) light0On = 0; else light0On = 1;
+				glutPostRedisplay();
+				break;
+			case 'd':
+				if (d > 0.0) d -= 0.05;
+				glutPostRedisplay();
+				break;
+			case 'D':
+				if (d < 1.0) d += 0.05;
 				glutPostRedisplay();
 				break;
 			default:
