@@ -87,7 +87,7 @@ void inicializacion(void) {
 	glEnable(GL_LIGHTING);
 
 	// Material property vectors.
-	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental
+	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental de los materiales
 	float matSpec[] = { 1.0, 1.0, 1,0, 1.0 };
 	float matShine[] = { 50.0 };
 
@@ -200,13 +200,10 @@ void display() {
 }
 
 void displayMobiliario() {
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glLoadIdentity(); // Restablece la matriz de modelo-vista
 
 	// Light property vectors.
 	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
 	float lightDifAndSpec0[] = { d, d, d, 1.0 };
-	//float lightPos0[] = { 0.0, 0.0, 3.0, 1.0 };
 	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 };
 	float globAmb[] = { m, m, m, 1.0 };
 
@@ -239,7 +236,7 @@ void displayMobiliario() {
 	}
 
 	if (mostrarEjes) {
-		//ejes3D();
+		ejes3D();
 	}
 
 	// Draw light spheres after disabling lighting.
@@ -247,13 +244,14 @@ void displayMobiliario() {
 
 	// Light0 and its sphere positioned (foco blanco).
 	glPushMatrix();
+	
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 	glTranslatef(lightPos0[0], lightPos0[1], lightPos0[2]);
-	//glColor3f(d, d, d);
 	glColor3f(d, d, d);
-	//if (light0On) glutWireSphere(0.05, 8, 8);
 	if (light0On) glutWireSphere(1.0, 8, 8);
+	
 	glPopMatrix();
+
 	glEnable(GL_LIGHTING);
 
 	generarMobiSalon(-31.5, 0.0, 0.0, 4, 4, 4.0);
