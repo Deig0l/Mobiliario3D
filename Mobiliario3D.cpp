@@ -340,6 +340,7 @@ void arrastreRaton(int x, int y) {
 }
 
 void ejes3D() {
+	glDisable(GL_LIGHTING);
 	//Lineas de los ejes
 	glBegin(GL_LINES);
 
@@ -359,6 +360,7 @@ void ejes3D() {
 	glVertex3f(0, 0, 300);
 
 	glEnd();
+	glEnable(GL_LIGHTING);
 }
 
 void asignarColor(Colores color) {
