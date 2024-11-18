@@ -25,6 +25,7 @@ bool mostrarControles = true;
 bool mousePresionado = false;
 
 void inicializacion(void);
+void display();
 void displayMobiliario();
 void cargarTextura(const char* filename);
 void tecladoMobiliario(unsigned char key, int x, int y);
@@ -60,7 +61,8 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Mobiliario 3D");
-	glutDisplayFunc(displayMobiliario);
+	//glutDisplayFunc(displayMobiliario);
+	glutDisplayFunc(display);
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
@@ -71,7 +73,8 @@ int main(int argc, char** argv) {
 }
 
 void inicializacion(void) {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	//glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
@@ -137,6 +140,11 @@ void cargarTextura(const char* filename) {
 	else {
 		std::cerr << "Error al cargar la imagen: " << filename << std::endl;
 	}
+}
+
+void display() {
+
+	displayMobiliario();
 }
 
 void displayMobiliario() {
