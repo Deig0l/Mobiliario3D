@@ -58,6 +58,7 @@ void silla(float x, float y, float z);
 void proyector(float x, float y, float z);
 void unidadMobiliario(float x, float y, float z);
 void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado);
+void imprimirControles();
 //void writeBitmapString(void* font, const char* string);
 //void controlesMensaje();
 
@@ -73,6 +74,7 @@ int main(int argc, char** argv) {
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
 	glutMotionFunc(arrastreRaton);
+	imprimirControles();
 	glutMainLoop();
 	return 0;
 }
@@ -87,7 +89,7 @@ void inicializacion(void) {
 	glEnable(GL_LIGHTING);
 
 	// Material property vectors.
-	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental
+	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental de los materiales
 	float matSpec[] = { 1.0, 1.0, 1,0, 1.0 };
 	float matShine[] = { 50.0 };
 
@@ -200,13 +202,10 @@ void display() {
 }
 
 void displayMobiliario() {
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glLoadIdentity(); // Restablece la matriz de modelo-vista
 
 	// Light property vectors.
 	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
 	float lightDifAndSpec0[] = { d, d, d, 1.0 };
-	//float lightPos0[] = { 0.0, 0.0, 3.0, 1.0 };
 	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 };
 	float globAmb[] = { m, m, m, 1.0 };
 
@@ -247,13 +246,14 @@ void displayMobiliario() {
 
 	// Light0 and its sphere positioned (foco blanco).
 	glPushMatrix();
+	
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 	glTranslatef(lightPos0[0], lightPos0[1], lightPos0[2]);
-	//glColor3f(d, d, d);
 	glColor3f(d, d, d);
-	//if (light0On) glutWireSphere(0.05, 8, 8);
 	if (light0On) glutWireSphere(1.0, 8, 8);
+	
 	glPopMatrix();
+
 	glEnable(GL_LIGHTING);
 
 	generarMobiSalon(-31.5, 0.0, 0.0, 4, 4, 4.0);
@@ -732,4 +732,12 @@ void generarMobiSalon(float x, float y, float z, int filas, int mesas, float esp
 		x -= (9.0 * mesas);
 		z += (5.4 + espaciado);
 	}
+}
+
+void imprimirControles()
+{
+	printf("Controles:\n"); 
+	printf("Presionar 'w' (o 'W') para prender/apagar el foco blanco\n");
+	printf("Presionar 'd/D' para atenuar/intensificar el foco blanco\n");
+	printf("Presionar 'm/M' para atenuar/intensificar la luz ambiental\n");
 }
