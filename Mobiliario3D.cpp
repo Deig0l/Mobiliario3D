@@ -25,12 +25,11 @@ bool mostrarControles = true;
 bool mousePresionado = false;
 
 //Globals for lighting
-static float m = 0.2; // Global ambient white light intensity.
+static float a = 0.2; // Global ambient white light intensity.
 static int light0On = 1; // White light on?
 static float d = 1.0; // Diffuse and specular white light intensity.
 
 void inicializacion(void);
-void display();
 void displayMobiliario();
 void cargarTextura(const char* filename);
 void tecladoMobiliario(unsigned char key, int x, int y);
@@ -67,9 +66,8 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
 	glutCreateWindow("Mobiliario 3D");
-	//glutDisplayFunc(displayMobiliario);
 	inicializacion();
-	glutDisplayFunc(display);
+	glutDisplayFunc(displayMobiliario);
 	glutKeyboardFunc(tecladoMobiliario);
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
@@ -163,51 +161,13 @@ void cargarTextura(const char* filename) {
 	}
 }
 
-void display() {
-	//// Light property vectors.
-	//float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
-	//float lightDifAndSpec0[] = { d, d, d, 1.0 };
-	////float lightPos0[] = { 0.0, 0.0, 3.0, 1.0 };
-	//float lightPos0[] = { -15.0, 20.0, -10.0, 1.0 };
-	//float globAmb[] = { m, m, m, 1.0 };
-
-	//// Light0 properties (foco blanco)
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDifAndSpec0);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, lightDifAndSpec0);
-
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
-
-	//// Turn lights off/on.
-	//if (light0On) glEnable(GL_LIGHT0); else glDisable(GL_LIGHT0);
-
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//glLoadIdentity(); // Restablece la matriz de modelo-vista
-
-	//// Draw light spheres after disabling lighting.
-	//glDisable(GL_LIGHTING);
-
-	//// Light0 and its sphere positioned (foco blanco).
-	//glPushMatrix();
-	//glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
-	//glTranslatef(lightPos0[0], lightPos0[1], lightPos0[2]);
-	////glColor3f(d, d, d);
-	//glColor3f(1.0, 0.0, 0.0);
-	////if (light0On) glutWireSphere(0.05, 8, 8);
-	//if (light0On) glutWireSphere(1.0, 8, 8);
-	//glPopMatrix();
-	//glEnable(GL_LIGHTING);
-
-	displayMobiliario();
-}
-
 void displayMobiliario() {
 
 	// Light property vectors.
 	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
 	float lightDifAndSpec0[] = { d, d, d, 1.0 };
 	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 };
-	float globAmb[] = { m, m, m, 1.0 };
+	float globAmb[] = { a, a, a, 1.0 };
 
 	// Light0 properties (foco blanco)
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
@@ -316,12 +276,12 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 			case 'H':
 				mostrarControles = !mostrarControles;
 				break;
-			case 'm':
-				if (m > 0.0) m -= 0.05;
+			case 'a':
+				if (a > 0.0) a -= 0.05;
 				glutPostRedisplay();
 				break;
-			case 'M':
-				if (m < 1.0) m += 0.05;
+			case 'A':
+				if (a < 1.0) a += 0.05;
 				glutPostRedisplay();
 				break;
 			case 'w':
@@ -739,5 +699,5 @@ void imprimirControles()
 	printf("Controles:\n"); 
 	printf("Presionar 'w' (o 'W') para prender/apagar el foco blanco\n");
 	printf("Presionar 'd/D' para atenuar/intensificar el foco blanco\n");
-	printf("Presionar 'm/M' para atenuar/intensificar la luz ambiental\n");
+	printf("Presionar 'a/A' para atenuar/intensificar la luz ambiental\n");
 }
