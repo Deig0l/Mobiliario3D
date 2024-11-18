@@ -85,7 +85,7 @@ void inicializacion(void) {
 	glEnable(GL_LIGHTING);
 
 	// Material property vectors.
-	float matAmbAndDif[] = { 0.0, 0.0, 1.0, 1.0 };
+	float matAmbAndDif[] = { 1.0, 1.0, 1.0, 1.0 };//Color de luz ambiental
 	float matSpec[] = { 1.0, 1.0, 1,0, 1.0 };
 	float matShine[] = { 50.0 };
 
@@ -254,6 +254,16 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 			case 'h':
 			case 'H':
 				mostrarControles = !mostrarControles;
+				break;
+			case 'm':
+				if (m > 0.0) m -= 0.05;
+				glutPostRedisplay();
+				break;
+			case 'M':
+				if (m < 1.0) m += 0.05;
+				glutPostRedisplay();
+				break;
+			default:
 				break;
 	}
 	glutPostRedisplay();
