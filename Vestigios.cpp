@@ -100,7 +100,7 @@
 //	glVertex3f(x + l, y, z - d);
 //	glEnd();
 //}
-
+//
 //void writeBitmapString(void* font, const char* string) {
 //	const char* c;
 //	for (c = string; *c != '\0'; c++) {
@@ -146,8 +146,8 @@
 //	writeBitmapString(GLUT_BITMAP_HELVETICA_10, "h -> controles");
 //	glutPostRedisplay();
 //}
-
-
+//
+//
 //Cargar textura anterior
 //void cargarTextura(const char* filename) {
 //	int width, height, nrChannels;
@@ -179,12 +179,12 @@
 //		std::cerr << "Error al cargar la imagen: " << filename << std::endl;
 //	}
 //}
-
-
-/*
-FIGURAS UTILIZANDO SOLO COLORES
-*/
-
+//
+//
+///*
+//FIGURAS UTILIZANDO SOLO COLORES
+//*/
+//
 //void monitor(float x, float y, float z) {
 //	//Base
 //	prismaMulticolor(1.6, 0.2, 1.4, 1.2 + x, 0.0 + y, 0.0 + z, DGREY, DGREY, GREY, GREY, DGREY,DGREY);
@@ -256,8 +256,8 @@ FIGURAS UTILIZANDO SOLO COLORES
 //	prismaMulticolor(3.0, 0.9, 2.5, 0.0 + x, 0.0 + y, 0.0 + z, GREY, GREY, LGREY, LGREY, GREY, GREY);
 //	cilindro(2.2 + x, 0.45 + y, -2.7 + z, 0.4, 0.2, BLACK, LBLUE);
 //}
-
-
+//
+//
 //void inicializacion(void) {
 //	//glClearColor(1.0, 1.0, 1.0, 1.0);
 //	glClearColor(0.75, 0.5, 1.0, 1.0);

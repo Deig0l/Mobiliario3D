@@ -239,7 +239,7 @@ void displayMobiliario() {
 	}
 
 	if (mostrarEjes) {
-		//ejes3D();
+		ejes3D();
 	}
 
 	// Draw light spheres after disabling lighting.
@@ -337,7 +337,7 @@ void tecladoMobiliario(unsigned char key, int x, int y) {
 				glutPostRedisplay();
 				break;
 			case 'D':
-				if (d < 1.0) d += 0.05;
+				if (d < 5.0) d += 0.05;
 				glutPostRedisplay();
 				break;
 			default:
