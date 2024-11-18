@@ -58,6 +58,7 @@ void silla(float x, float y, float z);
 void proyector(float x, float y, float z);
 void unidadMobiliario(float x, float y, float z);
 void generarMobiSalon(float x, float y, float z, int filas, int mesas, float espaciado);
+void imprimirControles();
 //void writeBitmapString(void* font, const char* string);
 //void controlesMensaje();
 
@@ -73,6 +74,7 @@ int main(int argc, char** argv) {
 	glutSpecialFunc(tecladoEspecialMobiliario);
 	glutMouseFunc(ratonMobiliario);
 	glutMotionFunc(arrastreRaton);
+	imprimirControles();
 	glutMainLoop();
 	return 0;
 }
@@ -730,4 +732,12 @@ void generarMobiSalon(float x, float y, float z, int filas, int mesas, float esp
 		x -= (9.0 * mesas);
 		z += (5.4 + espaciado);
 	}
+}
+
+void imprimirControles()
+{
+	printf("Controles:\n"); 
+	printf("Presionar 'w' (o 'W') para prender/apagar el foco blanco\n");
+	printf("Presionar 'd/D' para atenuar/intensificar el foco blanco\n");
+	printf("Presionar 'm/M' para atenuar/intensificar la luz ambiental\n");
 }
