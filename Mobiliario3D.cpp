@@ -24,6 +24,9 @@ bool mostrarEjes = true;
 bool mostrarControles = true;
 bool mousePresionado = false;
 
+//Globals for lighting
+static float m = 0.2; // Global ambient white light intensity.
+
 void inicializacion(void);
 void display();
 void displayMobiliario();
@@ -77,6 +80,20 @@ void inicializacion(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+
+	// Turn on OpenGL lighting.
+	glEnable(GL_LIGHTING);
+
+	// Material property vectors.
+	float matAmbAndDif[] = { 0.0, 0.0, 1.0, 1.0 };
+	float matSpec[] = { 1.0, 1.0, 1,0, 1.0 };
+	float matShine[] = { 50.0 };
+
+	// Material properties of mobiliario.
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, matAmbAndDif);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
+	glMaterialfv(GL_FRONT, GL_SHININESS, matShine);
+
 	//glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 	glOrtho(-100.0, 100.0, -100.0, 100.0, -100.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
@@ -143,6 +160,14 @@ void cargarTextura(const char* filename) {
 }
 
 void display() {
+	// Light property vectors.
+	float globAmb[] = { m, m, m, 1.0 };
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globAmb); // Global ambient light.
+
+	// Draw light spheres after disabling lighting.
+	/*glDisable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);*/
 
 	displayMobiliario();
 }
