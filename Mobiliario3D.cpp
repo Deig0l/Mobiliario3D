@@ -25,9 +25,9 @@ bool mostrarControles = true;
 bool mousePresionado = false;
 
 //Globals for lighting
-static float a = 0.2; // Global ambient white light intensity.
-static int light0On = 1; // White light on?
-static float d = 1.0; // Diffuse and specular white light intensity.
+static float a = 0.2; // Intensidad de la luz ambiental global.
+static int light0On = 1; // Determina si el foco blanco está prendido o apagado
+static float d = 1.0; // Intensidad difusa y especular del foco blanco.
 
 void inicializacion(void);
 void displayMobiliario();
@@ -164,10 +164,10 @@ void cargarTextura(const char* filename) {
 void displayMobiliario() {
 
 	// Light property vectors.
-	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 };
-	float lightDifAndSpec0[] = { d, d, d, 1.0 };
-	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 };
-	float globAmb[] = { a, a, a, 1.0 };
+	float lightAmb[] = { 0.0, 0.0, 0.0, 1.0 }; //Ambiental foco blanco
+	float lightDifAndSpec0[] = { d, d, d, 1.0 }; //Difuso y especular foco blanco
+	float lightPos0[] = { -15.0, 20.0, 10.0, 1.0 }; //Posición foco blanco
+	float globAmb[] = { a, a, a, 1.0 }; //Color luz ambiental
 
 	// Light0 properties (foco blanco)
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
